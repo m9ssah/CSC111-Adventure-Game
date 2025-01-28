@@ -24,17 +24,16 @@ from typing import Optional
 from game_entities import Location, Item
 from proj1_event_logger import Event, EventList
 
-
-# Note: You may add in other import statements here as needed
-
-# Note: You may add helper functions, classes, etc. below as needed
+import pygame
+import sys
 
 
 class AdventureGame:
     """A text adventure game class storing all location, item and map data.
 
     Instance Attributes:
-        - # TODO add descriptions of public instance attributes as needed
+        - current_location_id: MISSING
+        - ongoing: MISSING
 
     Representation Invariants:
         - # TODO add any appropriate representation invariants as needed

@@ -25,10 +25,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-
-# TODO: Copy/paste your ex1_event_logger code below, and modify it if needed to fit your game
-
-
 @dataclass
 class Event:
     """
@@ -60,10 +56,14 @@ class EventList:
     A linked list of game events.
 
     Instance Attributes:
-        - # TODO add descriptions of instance attributes here
+        - first: Event object representing the first event in the game, None if the game hasn't started
+        - last: Event object representing the last event in the game, None if the game hasn't started
 
     Representation Invariants:
-        - # TODO add any appropriate representation invariants, if needed
+        - if the list is not empty, then first and last should not be "None"
+        - if first is not none, then last should not be none
+        - if the list is empty, then both first and last should be none
+
     """
     first: Optional[Event]
     last: Optional[Event]
@@ -85,7 +85,6 @@ class EventList:
             print(f"Location: {curr.id_num}, Command: {curr.next_command}")
             curr = curr.next
 
-    # TODO: Complete the methods below, based on the given descriptions.
     def is_empty(self) -> bool:
         """
         Return whether this event list is empty.
