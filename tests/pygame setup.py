@@ -7,6 +7,7 @@ class Game:
         #general setup
         pygame.init()
         self.screen = pygame.display.set_mode((settings.WIDTH,settings.HEIGHT))
+        pygame.display.set_caption("Adventure Game")
         self.clock = pygame.time.Clock()
 
     def run(self):
@@ -22,4 +23,4 @@ class Game:
 
 if __name__ == '__main__':
     game = Game()
-    game.run
+    game.run()
