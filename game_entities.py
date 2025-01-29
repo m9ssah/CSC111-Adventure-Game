@@ -58,7 +58,10 @@ class Item:
     """An item in our text adventure game world.
 
     Instance Attributes:
-        - # TODO Describe each instance attribute here
+        - name: name of the item
+        - start_position: where the item initially wasa
+        - target_position: where the item must be
+        -target_points: MISSING
 
     Representation Invariants:
         - # TODO Describe any necessary representation invariants

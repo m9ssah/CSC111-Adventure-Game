@@ -2,7 +2,7 @@ import pygame
 import sys
 import settings
 
-class Game:
+class Render:
     def __init__(self):
         #general setup
         pygame.init()
@@ -22,5 +22,5 @@ class Game:
             self.clock.tick(settings.FPS)
 
 if __name__ == '__main__':
-    game = Game()
+    game = Render()
     game.run()

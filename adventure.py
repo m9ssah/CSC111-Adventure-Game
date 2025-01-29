@@ -59,9 +59,6 @@ class AdventureGame:
         - game_data_file is the filename of a valid game data JSON file
         """
 
-        # NOTES:
-        # You may add parameters/attributes/methods to this class as you see fit.
-
         # Requirements:
         # 1. Make sure the Location class is used to represent each location.
         # 2. Make sure the Item class is used to represent each item.

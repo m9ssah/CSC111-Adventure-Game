@@ -35,7 +35,6 @@ class AdventureGameSimulation:
     _game: AdventureGame
     _events: EventList
 
-    # TODO: Copy/paste your code from ex1_simulation below, and make adjustments as needed
     def __init__(self, game_data_file: str, initial_location_id: int, commands: list[str]) -> None:
         """Initialize a new game simulation based on the given game data, that runs through the given commands.
 
@@ -65,11 +64,13 @@ class AdventureGameSimulation:
             if command in current_location.available_commands:
                 next_location_id = current_location.available_commands[command]
                 next_location = self._game.get_location(next_location_id)
+                if next_location_id in self.get_id_log():
+                    description = next_location.brief_description
+                else:
+                    description = next_location.long_description
                 event = Event(
                     next_location.id_num,
-                    next_location.long_description
-                    # prolly going to have to edit this branch to add a brief description
-                    # at other times
+                    description
                 )
                 self._events.add_event(event, command)
                 current_location = next_location
@@ -87,15 +88,10 @@ class AdventureGameSimulation:
         >>> sim.get_id_log()
         [1, 2, 3, 3]
         """
-
-        # Note: We have completed this method for you. Do NOT modify it for ex1.
-
         return self._events.get_id_log()
 
     def run(self) -> None:
         """Run the game simulation and log location descriptions."""
-
-        # Note: We have completed this method for you. Do NOT modify it for ex1.
 
         current_event = self._events.first  # Start from the first event in the list
 
