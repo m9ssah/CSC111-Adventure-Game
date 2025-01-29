@@ -32,11 +32,12 @@ class AdventureGame:
     """A text adventure game class storing all location, item and map data.
 
     Instance Attributes:
-        - current_location_id: MISSING
-        - ongoing: MISSING
+        - current_location_id: the id of the current location
+        - ongoing: status of game
 
     Representation Invariants:
-        - # TODO add any appropriate representation invariants as needed
+        - current_location_id is not None
+        - TODO
     """
 
     # Private Instance Attributes (do NOT remove these two attributes):
@@ -72,9 +73,11 @@ class AdventureGame:
 
     @staticmethod
     def _load_game_data(filename: str) -> tuple[dict[int, Location], list[Item]]:
-        """Load locations and items from a JSON file with the given filename and
+        """
+        Load locations and items from a JSON file with the given filename and
         return a tuple consisting of (1) a dictionary of locations mapping each game location's ID to a Location object,
-        and (2) a list of all Item objects."""
+        and (2) a list of all Item objects.
+        """
 
         with open(filename, 'r') as f:
             data = json.load(f)  # This loads all the data from the JSON file
@@ -86,8 +89,10 @@ class AdventureGame:
             locations[loc_data['id']] = location_obj
 
         items = []
-        # TODO: Add Item objects to the items list; your code should be structured similarly to the loop above
-        # YOUR CODE BELOW
+        for item_data in data['items']:
+            item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'], item_data['target_position'],
+                            item_data['target_points'])
+            items += item_obj
 
         return locations, items
 

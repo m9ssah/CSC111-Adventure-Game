@@ -1,12 +1,12 @@
 import pygame
 import sys
-import settings
+from settings import *
 
 class Render:
     def __init__(self):
         #general setup
         pygame.init()
-        self.screen = pygame.display.set_mode((settings.WIDTH,settings.HEIGHT))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Adventure Game")
         self.clock = pygame.time.Clock()
 
@@ -19,7 +19,7 @@ class Render:
 
             self.screen.fill('black')
             pygame.display.update()
-            self.clock.tick(settings.FPS)
+            self.clock.tick(FPS)
 
 if __name__ == '__main__':
     game = Render()
