@@ -91,7 +91,9 @@ class AdventureGameSimulation:
         return self._events.get_id_log()
 
     def run(self) -> None:
-        """Run the game simulation and log location descriptions."""
+        """
+        Run the game simulation and log location descriptions.
+        """
 
         current_event = self._events.first  # Start from the first event in the list
 

@@ -113,6 +113,7 @@ class EventList:
         """
         if self.is_empty():
             return None
+        
         elif self.first == self.last:
             self.first = None
             self.last = None
@@ -121,6 +122,18 @@ class EventList:
             self.last.prev.next = None
             self.last = self.last.prev
 
+    def undo(self) -> Optional[Event]:
+        """
+        Undo the last event and return it
+        """
+        if self.is_empty():
+            print("Nothing to undo")
+            return None
+        else:
+            last_event = self.last
+            self.remove_last_event()
+            return last_event
+        
     def get_id_log(self) -> list[int]:
         """
         Return a list of all location IDs visited for each event in this list, in sequence.
