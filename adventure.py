@@ -24,8 +24,6 @@ from typing import Optional
 from game_entities import Location, Item, Player
 from proj1_event_logger import Event, EventList
 
-import pygame
-import sys
 
 
 class AdventureGame:
@@ -167,10 +165,25 @@ if __name__ == "__main__":
 
 
         if not location.visited:
+            new_event = Event(
+                id_num = location.id_num,
+                description = location.long_description,
+                next_command = choice
+            )
+            location.visited = True
             print(location.long_description)
+
         else:
+            event = Event(
+            id_num = location.id_num,
+            description = location.brief_description,
+            next_command = choice
+        )
             print(location.brief_description)
         
+        game.game_log.add_event(event, choice)
+
+
         print("What to do? Choose from: look, inventory, score, undo, log, quit")
         print("At this location, you can also:")
         for action in location.available_commands:
