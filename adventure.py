@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 from typing import Optional
 
-from game_entities import Location, Item
+from game_entities import Location, Item, Player
 from proj1_event_logger import Event, EventList
 
 import pygame
@@ -70,6 +70,8 @@ class AdventureGame:
         # Suggested attributes (you can remove and track these differently if you wish to do so):
         self.current_location_id = initial_location_id  # game begins at this location
         self.ongoing = True  # whether the game is ongoing
+        self.player = Player() #game player
+        self.game_log = EventList()  # This is REQUIRED as one of the baseline requirements
 
     @staticmethod
     def _load_game_data(filename: str) -> tuple[dict[int, Location], list[Item]]:
@@ -97,46 +99,78 @@ class AdventureGame:
         return locations, items
 
     def get_location(self, loc_id: Optional[int] = None) -> Location:
-        """Return Location object associated with the provided location ID.
+        """
+        Return Location object associated with the provided location ID.
         If no ID is provided, return the Location object associated with the current location.
         """
+        if loc_id is None or loc_id not in self._locations:
+            return self._locations[self.current_location_id]
+        return self._locations[loc_id]
 
-        # TODO: Complete this method as specified
-        # YOUR CODE BELOW
+def handle_undo(game: AdventureGame) -> None:
+    """
+    Handle the undo the command
+
+    Parameters
+    ----------
+    game : AdventureGame
+    """
+    last_event = game.game_log.remove_last_event()
+    if last_event:
+        game.current_location_id = last_event.id_num
+        print(f"Undid most recent event")
+        print(f"You returned to: {game.get_location().brief_description}")
+
+def go(game: AdventureGame, direction: str) -> None:
+    """
+    Handle the go command according to a given direction.
+
+    Parameters
+    ----------
+    game : AdventureGame
+    direction : str
+    """
+    location = game.get_location()
+    if direction in location.available_commands:
+        new_location_id = location.available_commands[direction]
+        game.current_location_id = new_location_id
+        new_location = game.get_location(new_location_id)
+        print(f"You moved to: {new_location.brief_description}")
+        # Log the event
+        event = Event(new_location_id, new_location.long_description, f"go {direction}")
+        game.game_log.add_event(event, f"go {direction}")
+    else:
+        print(f"Unable to move towards the {direction}")
+
 
 
 if __name__ == "__main__":
-
-    # When you are ready to check your work with python_ta, uncomment the following lines.
-    # (Delete the "#" and space before each line.)
-    # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 120,
     #     'disable': ['R1705', 'E9998', 'E9999']
     # })
 
-    game_log = EventList()  # This is REQUIRED as one of the baseline requirements
+
     game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
 
-    # Note: You may modify the code below as needed; the following starter code is just a suggestion
     while game.ongoing:
-        # Note: If the loop body is getting too long, you should split the body up into helper functions
-        # for better organization. Part of your marks will be based on how well-organized your code is.
 
         location = game.get_location()
+        game_log = EventList()
 
         # TODO: Add new Event to game log to represent current game location
         #  Note that the <choice> variable should be the command which led to this event
         # YOUR CODE HERE
 
-        # TODO: Depending on whether or not it's been visited before,
-        #  print either full description (first time visit) or brief description (every subsequent visit) of location
-        # YOUR CODE HERE
 
-        # Display possible actions at this location
+        if not location.visited:
+            print(location.long_description)
+        else:
+            print(location.brief_description)
+        
         print("What to do? Choose from: look, inventory, score, undo, log, quit")
         print("At this location, you can also:")
         for action in location.available_commands:
@@ -156,7 +190,16 @@ if __name__ == "__main__":
             # Note: For the "undo" command, remember to manipulate the game_log event list to keep it up-to-date
             if choice == "log":
                 game_log.display_events()
-            # ENTER YOUR CODE BELOW to handle other menu commands (remember to use helper functions as appropriate)
+            elif choice == "inventory":
+                game.player.inventory()
+            elif choice == "undo":
+                handle_undo(game)
+            elif choice == "look":
+                location.look()
+            elif choice == "quit":
+                print("Quiting game...")
+                game.ongoing = False
+
 
         else:
             # Handle non-menu actions
