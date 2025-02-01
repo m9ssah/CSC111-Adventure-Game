@@ -92,7 +92,7 @@ class AdventureGame:
         for item_data in data['items']:
             item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'], item_data['target_position'],
                             item_data['target_points'])
-            items += item_obj
+            items.append(item_obj)
 
         return locations, items
 
@@ -116,7 +116,7 @@ def handle_undo(game: AdventureGame) -> None:
     last_event = game.game_log.remove_last_event()
     if last_event:
         game.current_location_id = last_event.id_num
-        print(f"Undid most recent event")
+        print("Undid most recent event")
         print(f"You returned to: {game.get_location().brief_description}")
 
 def go(game: AdventureGame, direction: str) -> None:
@@ -133,14 +133,32 @@ def go(game: AdventureGame, direction: str) -> None:
         new_location_id = location.available_commands[direction]
         game.current_location_id = new_location_id
         new_location = game.get_location(new_location_id)
-        print(f"You moved to: {new_location.brief_description}")
+        print(f"You are now in: {new_location.brief_description}!")
         # Log the event
         event = Event(new_location_id, new_location.long_description, f"go {direction}")
         game.game_log.add_event(event, f"go {direction}")
     else:
         print(f"Unable to move towards the {direction}")
 
+def handle_score(player: Player) -> None:
+    """
+    handles the score method of the player class to display the current score.
 
+    Parameters
+    ----------
+    player : Player
+
+    Returns
+    -------
+    int
+    """
+    print(f"Your current score is: {player.score}")
+
+def pick_up_item(player: Player, item: Item) -> Item:
+    pass
+
+def drop_item(player: Player, item: Item) -> Item:
+    pass
 
 if __name__ == "__main__":
     # import python_ta
@@ -159,20 +177,14 @@ if __name__ == "__main__":
         location = game.get_location()
         game_log = EventList()
 
-        # TODO: Add new Event to game log to represent current game location
-        #  Note that the <choice> variable should be the command which led to this event
-        # YOUR CODE HERE
-
-
         if not location.visited:
-            new_event = Event(
+            event = Event(
                 id_num = location.id_num,
                 description = location.long_description,
                 next_command = choice
             )
             location.visited = True
             print(location.long_description)
-
         else:
             event = Event(
             id_num = location.id_num,
@@ -199,20 +211,24 @@ if __name__ == "__main__":
         print("You decided to:", choice)
 
         if choice in menu:
-            # TODO: Handle each menu command as appropriate
             # Note: For the "undo" command, remember to manipulate the game_log event list to keep it up-to-date
             if choice == "log":
                 game_log.display_events()
             elif choice == "inventory":
-                game.player.inventory()
+                game.player.display_inventory()
             elif choice == "undo":
                 handle_undo(game)
             elif choice == "look":
                 location.look()
+            elif choice == "score":
+                handle_score(game.player)
+            elif choice.startswith("go"):
+                direction = choice[3:].strip()  # Extract the direction (e.g., "east")
+                go(game, direction)
             elif choice == "quit":
                 print("Quiting game...")
                 game.ongoing = False
-
+                
 
         else:
             # Handle non-menu actions

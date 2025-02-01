@@ -20,7 +20,6 @@ This file is Copyright (c) 2025 CSC111 Teaching Team
 """
 from dataclasses import dataclass
 import pygame
-from settings import *
 
 @dataclass
 class Location:
@@ -83,29 +82,24 @@ class Item:
     # All item objects in your game MUST be represented as an instance of this class.
 
     name: str
+    description: str
     start_position: int
     target_position: int
     target_points: int
 
-class Player(pygame.spirte.Sprite):
-    """
-    The player character in the adventure game
-    TODO: Docstring, instance attr etc
-    """
-    def __init__(self, position, groups):
-        super().__init__(groups)
-        self.image = pygame.image.load('../FILENAME').convert_alpha()
-        self.rect = self.image.get_rect(topleft = position)
+class Player():
+    def __init__(self):
         self.inventory = []
+        self.score = 0
     
-    def inventory(self) -> None:
+    def display_inventory(self) -> None:
         """
         Displays a list of items that are currently present in a player's inventory
         """
-        if self.inventory:
-            print("Inventory:", ", ".join(self.inventory))
+        if self.inventory == [] or self.inventory is None:
+            print("Oops, seems like you have nothing in your inventory.")
         else:
-            "Oops, seems like you have nothing in your inventory."
+            print("Inventory:", ", ".join(item.name for item in self.inventory))
     
     def add_item(self, item: Item) -> None:
         """
@@ -114,19 +108,11 @@ class Player(pygame.spirte.Sprite):
         self.inventory.append(item)
         print(f"You just picked up: {item.name}")
 
-    def calculate_score(self) -> int:
-        pass
+    def calcu_score(self) -> int:
+        self.score = sum(item.target_points for item in self.inventory)
+        return self.score
 
-class Tile(pygame.sprite.Sprite):
-    """
-    TODO: Docstring, etc.
-    """
-    def __init__(self, position, groups):
-        super().__init__(groups)
-        self.image = pygame.image.load('../FILENAME').convert_alpha()
-        self.rect = self.image.get_rect(topleft = position)
-
-
+        
 
 # Note: Other entities you may want to add, depending on your game plan:
 # - Puzzle class to represent special locations (could inherit from Location class if it seems suitable)
