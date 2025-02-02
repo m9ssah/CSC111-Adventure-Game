@@ -106,9 +106,11 @@ class Player():
         Add a new item to the player's inventory.
         """
         self.inventory.append(item)
-        print(f"You just picked up: {item.name}")
 
-    def calcu_score(self) -> int:
+    def remove_item(self, item: Item) -> None:
+        self.inventory.pop(item)
+
+    def calc_score(self) -> int:
         self.score = sum(item.target_points for item in self.inventory)
         return self.score
 

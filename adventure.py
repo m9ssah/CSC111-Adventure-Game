@@ -1,3 +1,4 @@
+
 """CSC111 Project 1: Text Adventure Game - Game Manager
 
 Instructions (READ THIS FIRST!)
@@ -48,7 +49,7 @@ class AdventureGame:
     current_location_id: int  # Suggested attribute, can be removed
     ongoing: bool  # Suggested attribute, can be removed
 
-    def __init__(self, game_data_file: str, initial_location_id: int) -> None:
+    def __init__(self, game_data_file: str) -> None:
         """
         Initialize a new text adventure game, based on the data in the given file, setting starting location of game
         at the given initial location ID.
@@ -66,7 +67,7 @@ class AdventureGame:
         self._locations, self._items = self._load_game_data(game_data_file)
 
         # Suggested attributes (you can remove and track these differently if you wish to do so):
-        self.current_location_id = initial_location_id  # game begins at this location
+        self.current_location_id = 1  # game begins at king's college circle
         self.ongoing = True  # whether the game is ongoing
         self.player = Player() #game player
         self.game_log = EventList()  # This is REQUIRED as one of the baseline requirements
@@ -129,16 +130,16 @@ def go(game: AdventureGame, direction: str) -> None:
     direction : str
     """
     location = game.get_location()
-    if direction in location.available_commands:
+    if direction in location.available_commands: #irrelevant
         new_location_id = location.available_commands[direction]
         game.current_location_id = new_location_id
         new_location = game.get_location(new_location_id)
-        print(f"You are now in: {new_location.brief_description}!")
-        # Log the event
+        print(f"You are now in: {new_location.name}!")
+        # log the event
         event = Event(new_location_id, new_location.long_description, f"go {direction}")
         game.game_log.add_event(event, f"go {direction}")
-    else:
-        print(f"Unable to move towards the {direction}")
+    else: #irrelevant
+        print(f"Unable to move towards the {direction}") #irrelevant
 
 def handle_score(player: Player) -> None:
     """
@@ -154,10 +155,35 @@ def handle_score(player: Player) -> None:
     """
     print(f"Your current score is: {player.score}")
 
-def pick_up_item(player: Player, item: Item) -> Item:
-    pass
+def pick_up_item(game: AdventureGame, given_item: Item) -> None:
+    location = game.get_location()
+    # check if given_item is available
+    item = next((item for item in location.items if item.name.lower() == given_item.lower()), None)
+    if item is not None:
+        game.player.add_item(item)
+        print(f"You have successfully picked up: {given_item}!")
+        # log the event
+        event = Event(game.current_location_id, f"picked up {given_item}", f"pick up {given_item}")
+        game.game_log.add_event(event, f"pick up {given_item}")
+    else:
+        print("There's nothing to pick up")
 
-def drop_item(player: Player, item: Item) -> Item:
+def drop_item(game: AdventureGame, given_item: Item) -> None:
+    location = game.get_location()
+        # check if given_item is available
+    item = next((item for item in location.items if item.name.lower() == given_item.lower()), None)
+    if item is not None:
+        game.player.remove_item(given_item)
+        print(f"You have successfully dropped: {given_item}!")
+        # log the event
+        event = Event(game.current_location_id, f"dropped {given_item}", f"drop {Item}")
+        game.game_log.add_event(event, f"drop {Item}")
+        # add item to location
+        location.items.append(item)
+    else:
+        print("There's nothing to drop")
+
+def deposit(game: AdventureGame, given_item: Item) -> None:
     pass
 
 if __name__ == "__main__":
@@ -166,7 +192,6 @@ if __name__ == "__main__":
     #     'max-line-length': 120,
     #     'disable': ['R1705', 'E9998', 'E9999']
     # })
-
 
     game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
@@ -195,11 +220,14 @@ if __name__ == "__main__":
         
         game.game_log.add_event(event, choice)
 
-
         print("What to do? Choose from: look, inventory, score, undo, log, quit")
         print("At this location, you can also:")
+
         for action in location.available_commands:
             print("-", action)
+        if game.player.inventory() != []:
+            for item in game.player.inventory():
+                print("- drop", item) # TODO test whether it actually prints out properly
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()
@@ -211,7 +239,6 @@ if __name__ == "__main__":
         print("You decided to:", choice)
 
         if choice in menu:
-            # Note: For the "undo" command, remember to manipulate the game_log event list to keep it up-to-date
             if choice == "log":
                 game_log.display_events()
             elif choice == "inventory":
@@ -222,18 +249,22 @@ if __name__ == "__main__":
                 location.look()
             elif choice == "score":
                 handle_score(game.player)
-            elif choice.startswith("go"):
-                direction = choice[3:].strip()  # Extract the direction (e.g., "east")
-                go(game, direction)
             elif choice == "quit":
                 print("Quiting game...")
                 game.ongoing = False
                 
-
-        else:
-            # Handle non-menu actions
-            result = location.available_commands[choice]
-            game.current_location_id = result
-
-            # TODO: Add in code to deal with actions which do not change the location (e.g. taking or using an item)
-            # TODO: Add in code to deal with special locations (e.g. puzzles) as needed for your game
+        else: # Handle non-menu actions
+            if choice.startswith("go"):
+                direction = choice[3:].strip()  # Extract the direction
+                go(game, direction) #move to location
+            elif choice.startswith("pick"):
+                given_item = choice[5:].strip()
+                pick_up_item(game, given_item)
+            elif choice.startswith("drop"):
+                given_item = choice[5:].strip()
+                drop_item(game, given_item)
+            elif choice.startswith("deposit"):
+                given_item = choice[8:].strip()
+                deposit(game, given_item)
+            else:
+                print("Invalid input. Try again.")

@@ -100,16 +100,13 @@ class AdventureGameSimulation:
         while current_event:
             print(current_event.description)
             if current_event is not self._events.last:
-                print("You choose:", current_event.next_command)
+                print("You chose:", current_event.next_command)
 
             # Move to the next event in the linked list
             current_event = current_event.next
 
 
 if __name__ == "__main__":
-    # When you are ready to check your work with python_ta, uncomment the following lines.
-    # (Delete the "#" and space before each line.)
-    # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 120,

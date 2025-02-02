@@ -2,15 +2,64 @@
   "locations": [
     {
       "id": 1,
-      "name": "Bahen 1F",
-      "brief_description": "You are on the first floor of the Bahen Center. There are elevators to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are on the first floor of the Bahen Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "name": "King's College Circle",
+      "brief_description": "You are in the midst of King's College Circle. Gerstein is to the east, University College is to the North, Knox College is to the West, Convacation Hall is to the South East . You see something shiny on the ground -- looks like a toonie?",
+      "long_description": "You are in the midst of King's College Circle. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the East, and an exit from the building to King's College Circle to the South.",
       "available_commands": {
-        "go south": 4,
-        "go east": 2
+        "go east": 2,
+        "go north": 10,
+        "go west": 20,
+        "go south west": 30,
+        "go south": 40,
+        "go south east": 50
       },
       "items": ["toonie"]
+    },
+    {
+      "id": 2,
+      "name": "Gerstein 1F",
+      "brief_description": "You are on the the first floor of the Gerstein Science Information Center. There are elevators to the East, and an exit from the building to King's College Circle to the South. You see something shiny on the ground -- looks like a toonie?",
+      "long_description": "You are on the first floor of the  Gerstein Science Information Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the East, and an exit from the building to King's College Circle to the South.",
+      "available_commands": {
+        "go south": 1,
+        "go east": 3
+      },
+      "items": []
+    },
+    {
+      "id": 3,
+      "name": "Gerstein -1F",
+      "brief_description": "You are on floor -1 of the Bahen Center. MADLab is to the West, and the elevators are to the south. You see something shiny on the ground -- looks like a toonie?",
+      "long_description": "You are on the first floor of the Bahen Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "available_commands": {
+        "go west": 4,
+        "go south": 2
+      },
+      "items": [] 
+    },
+    {
+      "id": 4,
+      "name": "MADLab",
+      "brief_description": "You are in MADLab. MADLab is to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
+      "long_description": "You are MADLab. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "available_commands": {
+        "go south": 3,
+        "go east": 
+      },
+      "items": []
+    },
+    {
+      "id": 10,
+      "name": "MADLab",
+      "brief_description": "You are in MADLab. MADLab is to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
+      "long_description": "You are MADLab. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "available_commands": {
+        "go south": 3,
+        "go east": 
+      },
+      "items": []
     }
+    
   ],
   "items": [
     {
