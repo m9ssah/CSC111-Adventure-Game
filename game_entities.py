@@ -19,7 +19,6 @@ please consult our Course Syllabus.
 This file is Copyright (c) 2025 CSC111 Teaching Team
 """
 from dataclasses import dataclass
-import pygame
 
 @dataclass
 class Location:

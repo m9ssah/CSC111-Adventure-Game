@@ -3,63 +3,359 @@
     {
       "id": 1,
       "name": "King's College Circle",
-      "brief_description": "You are in the midst of King's College Circle. Gerstein is to the east, University College is to the North, Knox College is to the West, Convacation Hall is to the South East . You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are in the midst of King's College Circle. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the East, and an exit from the building to King's College Circle to the South.",
+      "brief_description": "You are in the midst of King's College Circle. Gerstein is to the East, Harthouse is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East. You see something shiny on the ground -- looks like a toonie?",
+      "long_description": "You are in the midst of King's College Circle. It's usually not as crowded at this time of the day, but today it is exceptionally crowded because of the sunny weather. A group of students are playing frisbee, others are laying on the grass. One student is rushing to their next class, wearing a heavy-looking backpack and carrying a textbook in their arms. Gerstein Science information is to the East, Hart House is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East.",
       "available_commands": {
         "go east": 2,
-        "go north": 10,
-        "go west": 20,
-        "go south west": 30,
-        "go south": 40,
-        "go south east": 50
+        "go north east" :10,
+        "go north": 20,
+        "go west": 30,
+        "go south west": 40,
+        "go south": 50,
+        "go south east": 60
       },
       "items": ["toonie"]
     },
     {
       "id": 2,
       "name": "Gerstein 1F",
-      "brief_description": "You are on the the first floor of the Gerstein Science Information Center. There are elevators to the East, and an exit from the building to King's College Circle to the South. You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are on the first floor of the  Gerstein Science Information Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the East, and an exit from the building to King's College Circle to the South.",
+      "brief_description": "You are on the the first floor of the Gerstein Science Information Center. There are elevators to the East, and an exit from the building to King's College Circle to the South.",
+      "long_description": "You are on the first floor of the  Gerstein Science Information Center. You see a handful of students studying to your left. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the East, and an exit from the building to King's College Circle to the South.",
       "available_commands": {
         "go south": 1,
         "go east": 3
       },
-      "items": []
+      "items": [""]
     },
     {
       "id": 3,
       "name": "Gerstein -1F",
-      "brief_description": "You are on floor -1 of the Bahen Center. MADLab is to the West, and the elevators are to the south. You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are on the first floor of the Bahen Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "brief_description": "You are on the basement level of the Gerstein Science Information Center. The elevator is to the south, and the entrance to MADLab is to the west.",
+      "long_description": "You find yourself on the basement level of the Gerstein Science Information Center. The lighting is dimmer here, casting long shadows across the tiled floor. A quiet hum of ventilation echoes through the hall. To the west, the entrance to MADLab is visible, its door slightly ajar. The elevator stands to the south, waiting to take you back up.",
       "available_commands": {
         "go west": 4,
         "go south": 2
       },
-      "items": [] 
+      "items": [""] 
     },
     {
       "id": 4,
       "name": "MADLab",
-      "brief_description": "You are in MADLab. MADLab is to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are MADLab. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "brief_description": "You are inside MADLab, a hub for mobile app and software development. The hallway is to the south.",
+      "long_description": "Stepping into MADLab, you see an array of workstations, each occupied by students engrossed in their screens. The faint clicking of keyboards fills the air, punctuated by the occasional murmur of collaboration. The glow of monitors bathes the room in cool light. If you're looking for the exit, the hallway is to the south.",
       "available_commands": {
-        "go south": 3,
-        "go east": 
+        "go south": 3
       },
-      "items": []
+      "items": [""]
+    },
+    {
+      "id": 20,
+      "name": "University College 1F",
+      "brief_description": "You are on the first floor of University College. King's College Circle is to the south, stairs lead up to the north, and long hallways stretch to the east and west",
+      "long_description": "The first floor of University College greets you with its towering Gothic architecture and dimly lit hallways. The scent of polished wood lingers in the air. The hallways extend in both directions, disappearing into the quiet depths of the building. To the north, a grand staircase invites you upward, while to the south, the exit opens onto King's College Circle.",
+      "available_commands": {
+        "go north": 21,
+        "go east": 22,
+        "go west": 23,
+        "go south": 1
+      },
+      "items": [""]
+    },
+    {
+      "id": 21,
+      "name": "University College 1F",
+      "brief_description": "You are on the first floor of University College. King's College Circle is to the south, stairs lead up to the north, and long hallways stretch to the east and west",
+      "long_description": "The first floor of University College greets you with its towering Gothic architecture and dimly lit hallways. The scent of polished wood lingers in the air. The hallways extend in both directions, disappearing into the quiet depths of the building. To the north, a grand staircase invites you upward, while to the south, the exit opens onto King's College Circle.",
+      "available_commands": {
+        "go south": 20,
+        "go east": 22,
+        "go west": 23,
+        "go north": 24
+      },
+      "items": [""]
+    },
+    {
+      "id": 22,
+      "name": "University College East Hallway",
+      "brief_description": "You are in the east hallway of University College. It's a dead end. The main entrance is to the south.",
+      "long_description": "The east hallway of University College is eerily quiet, lined with doors leading to empty classrooms. A faint draft stirs the dust motes in the air, and the dim lighting adds to the sense of isolation. The corridor ends in a solid wall, leaving you with no choice but to retrace your steps back to the south, towards the main entrance.",
+      "available_commands": {
+        "go south": 20
+      },
+      "items": [""]
+    },
+    {
+      "id": 23,
+      "name": "University College West Hallway",
+      "brief_description": "You are on the first floor of University College. King's College Circle is to the south, stairs lead up to the north, and long hallways stretch to the east and west",
+      "long_description": "The west hallway of University College stretches before you, lined with wooden doors and aged portraits of scholars long past. The dim lighting casts elongated shadows, giving the corridor a slightly eerie feel. The air is thick with silence, except for the occasional creak of the old wooden floors beneath your feet. The hallway comes to an abrupt dead end, forcing you to turn back south towards the main entrance.",
+      "available_commands": {
+        "go south": 20
+      },
+      "items": [""]
+    },
+    {
+      "id": 24,
+      "name": "University College 2F",
+      "brief_description": "You are on the second floor of University College. The UC library is to the east, and the stairs leading down are to the south",
+      "long_description": "The second floor of University College is a quieter, more secluded space, perfect for deep thought. The wooden floors creak softly underfoot, and the scent of old books drifts in from the library to the east. Dim light filters through the stained-glass windows, casting colorful patterns on the walls. The staircase behind you leads back down to the first floor.",
+      "available_commands": {
+        "go south": 20,
+        "go east": 25
+      },
+      "items": [""]
+    },
+    {
+      "id": 25,
+      "name": "University College Library",
+      "brief_description": "You are in the University College Library. The hallway is to the south, and the study room where you were earlier is to the north",
+      "long_description": "The first floor of University College greets you with its towering Gothic architecture and dimly lit hallways. The scent of polished wood lingers in the air. The hallways extend in both directions, disappearing into the quiet depths of the building. To the north, a grand staircase invites you upward, while to the south, the exit opens onto King's College Circle.",
+      "available_commands": {
+        "go south": 24,
+        "go north": 26
+      },
+      "items": [""]
+    },
+    {
+      "id": 26,
+      "name": "Study Room",
+      "brief_description": "You are in the study room. The library is to the south. You notice your dorm keys under a chair alongside your Darth Vader keychain.",
+      "long_description": "The study room is eerily quiet, safe for the occasional scratching of pens on paper. The furniture is well-used, with carved initials decorating the wooden desks. As you shift your chair, something catches your eye—a glint of metal under one of the chairs. Your dorm keys! AND YOUR DARTH VADER KEYCHAIN. Seems like you left them here earlier. The library is to the south.",
+      "available_commands": {
+        "go south": 25,
+        "pick up dorm keys": 26
+      },
+      "items": ["dorm keys"]
+    },
+    {
+      "id": 30,
+      "name": "Knox College 1F",
+      "brief_description": "You are in the grand entrance of Knox College. King's College Circle is to the south, the library is to the east, and the breezeway leading to the residence is to the north.",
+      "long_description": "The main entrance of Knox College is an impressive sight, with its high-arched ceilings and heavy wooden doors. The Gothic architecture creates a sense of grandeur, with stained-glass windows casting colorful patterns on the stone floor. To the north, the breezeway leads toward the residence halls, while the library beckons from the east. To the south, the exit opens onto King's College Circle",
+      "available_commands": {
+        "go south": 1,
+        "go east": 31,
+        "go north": 32
+      },
+      "items": [""]
+    },
+    {
+      "id": 31,
+      "name": "Knox College Library",
+      "brief_description": "You are in the Knox College Library. The main entrance is to the south.",
+      "long_description": "The Knox College Library exudes an air of quiet academia, its towering bookshelves packed with theological texts and aged manuscripts. The scent of old paper fills the room, and soft candle-like lighting provides a cozy atmosphere. Students sit at long wooden tables, engrossed in their studies. The main entrance is to the south.",
+      "available_commands": {
+        "go south": 30
+      },
+      "items": [""]
+    },
+    {
+      "id": 32,
+      "name": "Breezeway",
+      "brief_description": "You are in the breezeway, a narrow stone passage leading to the residence hall. The main entrance is to the south, and the residence hall is to the north",
+      "long_description": "The breezeway is a long, narrow stone corridor connecting different wings of Knox College. The sound of footsteps echoes through the passage, and a cool breeze drifts in from the arched openings along the sides. The residence hall is visible to the north, while the main entrance lies behind you to the south",
+      "available_commands": {
+        "go south": 30,
+        "go north": 33
+      },
+      "items": [""]
+    },
+    {
+      "id": 33,
+      "name": "Residence Hall",
+      "brief_description": "You are in the Knox College residence hall. Your dorm room is to the west, the stairway leading downstairs is to the east, and the breezeway is to the south.",
+      "long_description": "The residence hall has the familiar scent of coffee and laundry detergent. Students move in and out of their rooms, some engaged in quiet conversations, others rushing off to class. To the west is your dorm room, a personal retreat from the world. The breezeway to the south connects back to the main entrance.",
+      "available_commands": {
+        "go south": 32,
+        "go west": 34,
+        "go east": 35
+      },
+      "items": [""]
+    },
+    {
+      "id": 34,
+      "name": "Dorm Room",
+      "brief_description": "You are in your dorm room. The hallway is to the south.",
+      "long_description": "Your dorm room is a small but cozy space, cluttered with textbooks, half-empty coffee cups, and a laptop glowing softly on your desk. The walls are adorned with posters and a corkboard filled with reminders. A comfortable bed sits in the corner, offering a tempting break from your studies. The hallway is just outside to the south.",
+      "available_commands": {
+        "go south": 33
+      },
+      "items": [""]
+    },
+    {
+      "id": 35,
+      "name": "Residence Hall Basement Game Room",
+      "brief_description": "You are in the TV and games room of Knox College's basement. A stairway is to the south. You spot a rare Pokémon card on the floor.",
+      "long_description": "The dimly lit games room is a haven for students looking to unwind. A worn-out couch sits in front of an old but functional TV, where a paused video game flickers on the screen. A few tables hold a scattered deck of cards, and a foosball table stands unused in the corner. As you look around, something catches your eye—a rare Pokémon card lying on the floor. The stairway leading up is to the south.",
+      "available_commands": {
+        "go south": 33,
+        "pick up pokemon card": 35
+      },
+      "items": ["pokemon card"]
+    },
+    {
+      "id": 40,
+      "name": "Convacation Hall Entrance",
+      "brief_description": "You are at the entrance of Convocation Hall. King's College Circle is to the south, and the main hall is to the north.",
+      "long_description": "The grand entrance of Convocation Hall is framed by towering stone columns. Students bustle past, some heading toward their lectures, others stopping to admire the historic architecture. The air is thick with anticipation, as important speeches and ceremonies often take place here. To the north, the main hall beckons, while the exit to King's College Circle is to the south.",
+      "available_commands": {
+        "go south": 1,
+        "go north": 41
+      },
+      "items": [""]
+    },
+    {
+      "id": 41,
+      "name": "Convacation Hall",
+      "brief_description": "YYou are in the main hall of Convocation Hall. The entrance is to the south. The room is filled with students attending a lecture.",
+      "long_description": "The vast, domed main hall of Convocation Hall is filled with rows of seats occupied by students listening intently to a professor at the front. The acoustics amplify the lecturer’s voice, making every word crisp and clear. The towering walls are lined with intricate moldings, and chandeliers cast a soft glow over the attentive audience. The entrance to the south leads back outside.",
+      "available_commands": {
+        "go south": 40
+      },
+      "items": [""]
+    },
+    {
+      "id": 50,
+      "name": "Sandford Fleming Building Main Entrance",
+      "brief_description": "You are at the entrance of the Sandford Fleming Building. The 'study pit' is visible on the ground floor to your right, where you spot one of your friends. The stairway upstairs is to the north east, and the stairway downstairs is to the north west. The exit to King's College Circle is to the south",
+      "long_description": "Your dorm room is a small but cozy space, cluttered with textbooks, half-empty coffee cups, and a laptop glowing softly on your desk. The walls are adorned with posters and a corkboard filled with reminders. A comfortable bed sits in the corner, offering a tempting break from your studies. The hallway is just outside to the south.",
+      "available_commands": {
+        "go south": 1,
+        "go north west": 51,
+        "go north east": 53
+      },
+      "items": [""]
+    },
+    {
+      "id": 51,
+      "name": "Sandford Fleming Building 2F",
+      "brief_description": "You are on the second floor of the Sandford Fleming Building. The Engineering and Computer Science Library is to the west, and the stairs lead down to the south.",
+      "long_description": "The second floor of the Sandford Fleming Building is bustling with students. The air hums with quiet discussions about algorithms and circuits. To the west, the Engineering and Computer Science Library offers a silent retreat for focused study, while the stairs to the south lead back down to the lower levels.",
+      "available_commands": {
+        "go south": 50,
+        "go west": 52
+      },
+      "items": [""]
+    },
+    {
+      "id": 52,
+      "name": "Engineering and Computer Science Building",
+      "brief_description": "You are in the Engineering and Computer Science Library. The main hallway is to the south",
+      "long_description": "The library is filled with the quiet buzz of concentration. Rows of workstations hum with activity, screens glowing with lines of code and complex equations. Reference books on everything from machine learning to electrical engineering line the shelves. The main hallway is to the south",
+      "available_commands": {
+        "go south": 51
+      },
+      "items": [""]
+    },
+    {
+      "id": 53,
+      "name": "Study Pit",
+      "brief_description": "You are in the study pit, a sunken area filled with students working on assignments. A stairway leading up is to the south. You wave at your friend.",
+      "long_description": "The study pit is a well-known gathering place for engineering students, its tiered seating making it an ideal spot for collaboration. A few students are deep in discussion over a circuit diagram, while others quietly type away on their laptops. You spot one of your friends in the distance and give them a wave. To the south, a stairway leads back up.",
+      "available_commands": {
+        "go south": 50
+      },
+      "items": [""]
+    },
+    {
+      "id": 60,
+      "name": "Medical Sciences 1F",
+      "brief_description": "You are on the first floor of the Medical Sciences Building. The stairs are to the west, a Starbucks is to the north, and King's College Circle is to the south.",
+      "long_description": "The first floor of the Medical Sciences Building smells faintly of coffee and antiseptic. A stream of students in lab coats pass by, some balancing trays of test tubes. To the north, the inviting aroma of Starbucks promises a much-needed caffeine boost, while the stairway to the west leads to the upper levels. The exit to King's College Circle is to the south.",
+      "available_commands": {
+        "go south": 1,
+        "go west": 61
+      },
+      "items": [""]
+    },
+    {
+      "id": 61,
+      "name": "Medical Sciences 2F",
+      "brief_description": "You are on the second floor of the Medical Sciences Building. The stairs leading down are to the south, and the CSC111 lecture room (3154) is to the east. You find your laptop charger plugged into the wall—you must have forgotten to take it after class.",
+      "long_description": "The second floor of the Medical Sciences Building is lined with lecture halls and quiet study nooks. A stray sheet of lecture notes flutters on the ground, abandoned in the rush of students heading to their next class. You glance to the side and spot your laptop charger still plugged into the wall—seems like you left it behind after your CSC111 lecture. The stairway to the south leads downward, while room 3154 is just to the east.",
+      "available_commands": {
+        "go south": 60,
+        "go east": 62
+      },
+      "items": [""]
+    },
+    {
+      "id": 62,
+      "name": "Lecture Room 3154",
+      "brief_description": "You are in room 3154, where your weekly CSC111 lectures take place. The exit is to the south.",
+      "long_description": "This large lecture hall is filled with tiered seating and boards covered in Python code. The faint smell of dry erase markers lingers in the air. Students are either typing away on their laptops or zoning out mid-lecture. The exit is to the south.",
+      "available_commands": {
+        "go south": 61
+      },
+      "items": [""]
     },
     {
       "id": 10,
-      "name": "MADLab",
-      "brief_description": "You are in MADLab. MADLab is to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are MADLab. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "name": "Hart House 1F",
+      "brief_description": "You are on the first floor of Hart House. King's College Circle is to the south. There is an information center to the north, a stairway to the west, and the quad is to the east.",
+      "long_description": "The first floor of Hart House is grand yet welcoming, with high ceilings and historic décor. The sound of classical music drifts from a nearby rehearsal room, blending with the murmur of students asking for event details at the information center to the north. The stairway to the west leads upward, while the quad to the east offers a breath of fresh air.",
       "available_commands": {
-        "go south": 3,
-        "go east": 
+        "go south": 1,
+        "go west": 12,
+        "go east": 11
       },
-      "items": []
+      "items": [""]
+    },
+    {
+      "id": 11,
+      "name": "Hart House Quad",
+      "brief_description": "You are in the Hart House Quad, a peaceful courtyard surrounded by ivy-covered walls. The hallway back inside is to the south",
+      "long_description": "The Hart House Quad is a hidden gem—a quiet escape from the chaos of campus life. Stone benches line the edges of the courtyard, where a few students sit, deep in conversation. The air is crisp, and the ivy-clad walls add a timeless charm. The hallway leading back inside is to the south.",
+      "available_commands": {
+        "go south": 10
+      },
+      "items,": [""]
+    },
+    {
+      "id": 12,
+      "name": "Hart House -1F",
+      "brief_description": "You are in the basement of Hart House. The fitness center is to the north, the Arbor Room is to the west, and the student lounge is to the east. The stairway back up is to the south",
+      "long_description": "The basement of Hart House is a lively hub of student activity. To the north, the fitness center is alive with the sound of weights clanking and treadmills whirring. To the west, the Arbor Room offers a cozy café for quiet study, while to the east, the student lounge provides a space to relax and socialize. The stairway back up is to the south.",
+      "available_commands": {
+        "go east": 15,
+        "go south": 10,
+        "go west": 14,
+        "go north": 13
+      },
+      "items": [""]
+    },
+    {
+      "id": 13,
+      "name": "Hart House fitness centre",
+      "brief_description": "You are in the Hart House Fitness Centre. The hallway leading back is to the south.",
+      "long_description": "The rhythmic sounds of weights clanking and treadmills whirring fill the air in the Hart House Fitness Centre. The room is packed with students squeezing in workouts between classes—some lifting weights, others stretching near the mirrored walls. A faint smell of sweat lingers, but the energy in the room is invigorating. The hallway back to the main area is to the south",
+      "available_commands": {
+        "go south": 12
+      },
+      "items": [""]
+    },
+    {
+      "id": 14,
+      "name": "Arbor Room",
+      "brief_description": "You are in the Arbor Room, a cozy café in the basement of Hart House. The hallway is to the south.",
+      "long_description": "The Arbor Room is a peaceful retreat from the campus rush. The scent of freshly brewed coffee and warm pastries fills the air. A few students sit at wooden tables, some reading, others deep in quiet conversation. The lighting is dim and cozy, adding to the welcoming atmosphere. The hallway leading back is to the south",
+      "available_commands": {
+        "go south": 12
+      },
+      "items": [""]
+    },
+    {
+      "id": 15,
+      "name": "Student Lounge",
+      "brief_description": "You are in the Hart House Student Lounge. The hallway is to the south.",
+      "long_description": "The student lounge is a comfortable space filled with plush chairs and couches. A few students are engaged in a heated board game match, while others scroll through their phones or chat quietly. A bulletin board nearby is cluttered with event posters and club announcements. The hallway leading back is to the south.",
+      "available_commands": {
+        "go south": 12
+      },
+      "items": [""]
     }
-    
+
+
   ],
   "items": [
     {
@@ -68,6 +364,27 @@
       "start_position": 1,
       "target_position": 4,
       "target_points": 5
+    },
+    {
+      "name":"",
+      "description": "none",
+      "start_position": -1,
+      "target_position": -1,
+      "target_points": -1
+    },
+    {
+      "name": "dorm keys",
+      "description": "Your dorm keys are on the floor, you must've forgotten them",
+      "start_position": 26,
+      "target_position": 34,
+      "target_points": 10
+    },
+    {
+      "name": "pokemon card",
+      "description": "looks like your lucky today (or maybe not). someone must've dropped a rare pokemon card",
+      "start_position": 35,
+      "target_position": 34,
+      "target_points": 7
     }
   ]
 }

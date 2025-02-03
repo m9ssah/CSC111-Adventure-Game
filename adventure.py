@@ -49,7 +49,7 @@ class AdventureGame:
     current_location_id: int  # Suggested attribute, can be removed
     ongoing: bool  # Suggested attribute, can be removed
 
-    def __init__(self, game_data_file: str) -> None:
+    def __init__(self, game_data_file: str, initial_location: int) -> None:
         """
         Initialize a new text adventure game, based on the data in the given file, setting starting location of game
         at the given initial location ID.
@@ -67,7 +67,7 @@ class AdventureGame:
         self._locations, self._items = self._load_game_data(game_data_file)
 
         # Suggested attributes (you can remove and track these differently if you wish to do so):
-        self.current_location_id = 1  # game begins at king's college circle
+        self.current_location_id = initial_location  # game begins at king's college circle
         self.ongoing = True  # whether the game is ongoing
         self.player = Player() #game player
         self.game_log = EventList()  # This is REQUIRED as one of the baseline requirements
@@ -86,7 +86,7 @@ class AdventureGame:
         locations = {}
         for loc_data in data['locations']:  # Go through each element associated with the 'locations' key in the file
             location_obj = Location(loc_data['id'], loc_data['brief_description'], loc_data['long_description'],
-                                    loc_data['available_commands'], loc_data['items'])
+                                    loc_data['available_commands'], loc_data["items"])
             locations[loc_data['id']] = location_obj
 
         items = []
@@ -94,7 +94,7 @@ class AdventureGame:
             item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'], item_data['target_position'],
                             item_data['target_points'])
             items.append(item_obj)
-
+        print(loc_data)
         return locations, items
 
     def get_location(self, loc_id: Optional[int] = None) -> Location:
@@ -225,8 +225,8 @@ if __name__ == "__main__":
 
         for action in location.available_commands:
             print("-", action)
-        if game.player.inventory() != []:
-            for item in game.player.inventory():
+        if game.player.inventory != []:
+            for item in game.player.inventory:
                 print("- drop", item) # TODO test whether it actually prints out properly
 
         # Validate choice
