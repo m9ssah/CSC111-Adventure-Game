@@ -96,7 +96,7 @@ class Player():
         """
         Displays a list of items that are currently present in a player's inventory
         """
-        if self.inventory == [] or self.inventory is None:
+        if self.inventory == [] or self.inventory is None: # TODO: check if u can remove one of them (redundancy)
             print("Oops, seems like you have nothing in your inventory.")
         else:
             print("Inventory:", ", ".join(item.name for item in self.inventory))
@@ -108,7 +108,7 @@ class Player():
         self.inventory.append(item)
 
     def remove_item(self, item: Item) -> None:
-        self.inventory.pop(item)
+        self.inventory.remove(item) #used to be pop, changed to remove
 
     def calc_score(self) -> int:
         self.score = sum(item.target_points for item in self.inventory)

@@ -83,16 +83,20 @@ class AdventureGame:
             data = json.load(f)  # This loads all the data from the JSON file
 
         locations = {}
-        for loc_data in data['locations']:  # Go through each element associated with the 'locations' key in the file
-            location_obj = Location(loc_data['id'], loc_data["name"], loc_data['brief_description'], loc_data['long_description'],
-                                    loc_data['available_commands'], loc_data["items"])
-            locations[loc_data['id']] = location_obj
-
+        item_dict = {}
         items = []
         for item_data in data['items']:
             item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'], item_data['target_position'],
                             item_data['target_points'])
             items.append(item_obj)
+            item_dict[item_data["name"].lower()] = item_obj
+
+        for loc_data in data['locations']:
+            item_objects = [item_dict[item_name.lower()] for item_name in loc_data['items'] if item_name.lower() in item_dict]
+            location_obj = Location(loc_data['id'], loc_data["name"], loc_data['brief_description'],
+                                    loc_data['long_description'], loc_data['available_commands'], item_objects)
+            locations[loc_data['id']] = location_obj
+
         return locations, items
 
     def get_location(self, loc_id: Optional[int] = None) -> Location:
@@ -154,35 +158,41 @@ def handle_score(player: Player) -> None:
     """
     print(f"Your current score is: {player.score}")
 
-def pick_up_item(game: AdventureGame, given_item: Item) -> None:
+def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
     location = game.get_location()
-    print(location.items)
-    # check if given_item is available
-    item = next((item for item in location.items if item.name.lower() == given_item.lower()), None)
-    print(item)
-    if item is not None:
-        game.player.add_item(item)
-        print(f"You have successfully picked up: {given_item}!")
-        # log the event
-        event = Event(game.current_location_id, f"picked up {given_item}", f"pick up {given_item}")
-        game.game_log.add_event(event, f"pick up {given_item}")
-    else:
-        print("There's nothing to pick up")
+    print(f"DEBUG: Items in {location.name}: {[item.name for item in location.items]}")
 
-def drop_item(game: AdventureGame, given_item: Item) -> None:
-    location = game.get_location()
-        # check if given_item is available
-    item = next((item for item in location.items if item.lower() == given_item.lower()), None)
-    if item is not None:
-        game.player.remove_item(given_item)
-        print(f"You have successfully dropped: {given_item}!")
-        # log the event
-        event = Event(game.current_location_id, f"dropped {given_item}", f"drop {Item}")
-        game.game_log.add_event(event, f"drop {Item}")
-        # add item to location
-        location.items.append(item)
+    # Find the item by name (case-insensitive)
+    item_to_pick_up = next(item for item in location.items if item.name.lower() == given_item_name.lower())
+
+    if item_to_pick_up is not None:
+        game.player.add_item(item_to_pick_up)
+        # TODO Remove the item from the location
+        print(f"You have successfully picked up: {item_to_pick_up.name}!")
+        # log the event (using item_to_pick_up.name)
+        event = Event(game.current_location_id, f"picked up {item_to_pick_up.name}", f"pick up {item_to_pick_up.name}")
+        game.game_log.add_event(event, f"pick up {item_to_pick_up.name}")
     else:
-        print("There's nothing to drop")
+        print("There's nothing to pick up by that name.")
+
+
+
+def drop_item(game: AdventureGame, given_item_name: str) -> None:
+    # Find the item by name (case-insensitive)
+    item_to_drop = next((item for item in game.player.inventory if item.name.lower() == given_item_name.lower()), None)
+
+    if item_to_drop is not None:
+        game.player.inventory.remove(item_to_drop)
+        game.get_location().items.append(item_to_drop)  # Add item back to the location
+        print(f"You have successfully dropped: {item_to_drop.name}!")
+        # log the event
+        event = Event(game.current_location_id, f"dropped {item_to_drop.name}", f"drop {item_to_drop.name}")
+        game.game_log.add_event(event, f"drop {item_to_drop.name}")
+    else:
+        print("You don't have an item by that name to drop.")
+
+
+
 
 def deposit(game: AdventureGame, given_item: Item) -> None:
     pass
@@ -195,13 +205,14 @@ if __name__ == "__main__":
     #     'disable': ['R1705', 'E9998', 'E9999']
     # })
 
+    game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
     
     while game.ongoing:
-        game_log = EventList()
         location = game.get_location()
+
         if not location.visited:
             event = Event(
                 id_num = location.id_num,

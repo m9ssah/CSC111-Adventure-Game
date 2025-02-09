@@ -25,6 +25,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
+
 @dataclass
 class Event:
     """
@@ -106,34 +107,33 @@ class EventList:
             event.prev = self.last
             self.last = event
 
-    def remove_last_event(self) -> None:
+    def remove_last_event(self) -> Optional[None]:  # updated this method to return the event removed
         """
         Remove the last event from this event list.
         If the list is empty, do nothing.
         """
         if self.is_empty():
             return None
-        
+
         elif self.first == self.last:
+            last_event = self.first
             self.first = None
             self.last = None
+            return last_event
+
         else:
+            last_event = self.last
             self.last.prev.next_command = None
             self.last.prev.next = None
             self.last = self.last.prev
+            return last_event
 
     def undo(self) -> Optional[Event]:
         """
         Undo the last event and return it
         """
-        if self.is_empty():
-            print("Nothing to undo")
-            return None
-        else:
-            last_event = self.last
-            self.remove_last_event()
-            return last_event
-        
+        return self.remove_last_event()
+
     def get_id_log(self) -> list[int]:
         """
         Return a list of all location IDs visited for each event in this list, in sequence.
@@ -146,14 +146,8 @@ class EventList:
             curr = curr.next
         return locations
 
-    # Note: You may add other methods to this class as needed
-
-
 if __name__ == "__main__":
     pass
-    # When you are ready to check your work with python_ta, uncomment the following lines.
-    # (Delete the "#" and space before each line.)
-    # IMPORTANT: keep this code indented inside the "if __name__ == '__main__'" block
     # import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 120,
