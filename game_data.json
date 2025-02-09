@@ -6,7 +6,6 @@
       "brief_description": "You are in the midst of King's College Circle. Gerstein is to the East, Harthouse is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East. You see something shiny on the ground -- looks like a toonie?",
       "long_description": "You are in the midst of King's College Circle. It's usually not as crowded at this time of the day, but today it is exceptionally crowded because of the sunny weather. A group of students are playing frisbee, others are laying on the grass. One student is rushing to their next class, wearing a heavy-looking backpack and carrying a textbook in their arms. Gerstein Science information is to the East, Hart House is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East.",
       "available_commands": {
-        "pick up toonie": 1,
         "go east": 2,
         "go north east" :10,
         "go north": 20,

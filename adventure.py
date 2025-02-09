@@ -160,20 +160,24 @@ def handle_score(player: Player) -> None:
 
 def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
     location = game.get_location()
+    
+    # Debugging output
+    print(f"DEBUG: Attempting to pick up '{given_item_name}'")
     print(f"DEBUG: Items in {location.name}: {[item.name for item in location.items]}")
 
-    # Find the item by name (case-insensitive)
-    item_to_pick_up = next(item for item in location.items if item.name.lower() == given_item_name.lower())
+    # Find the item by name
+    item_to_pick_up = next((item for item in location.items if item.name.strip().lower() == given_item_name.strip().lower()), None)
 
     if item_to_pick_up is not None:
         game.player.add_item(item_to_pick_up)
-        # TODO Remove the item from the location
+        location.items.remove(item_to_pick_up)  # Ensure item is removed from location
         print(f"You have successfully picked up: {item_to_pick_up.name}!")
-        # log the event (using item_to_pick_up.name)
-        event = Event(game.current_location_id, f"picked up {item_to_pick_up.name}", f"pick up {item_to_pick_up.name}")
+        # remove item from the location after picking it up:
+        # Log the event
+        event = Event(game.current_location_id, f"picked up {item_to_pick_up.name}", None, None, game.game_log.last)
         game.game_log.add_event(event, f"pick up {item_to_pick_up.name}")
     else:
-        print("There's nothing to pick up by that name.")
+        print(f"Cannot find '{given_item_name}'. Check spelling and try again.")
 
 
 
@@ -186,7 +190,7 @@ def drop_item(game: AdventureGame, given_item_name: str) -> None:
         game.get_location().items.append(item_to_drop)  # Add item back to the location
         print(f"You have successfully dropped: {item_to_drop.name}!")
         # log the event
-        event = Event(game.current_location_id, f"dropped {item_to_drop.name}", f"drop {item_to_drop.name}")
+        event = Event(game.current_location_id, f"dropped {item_to_drop.name}", None, None, game_log.last)
         game.game_log.add_event(event, f"drop {item_to_drop.name}")
     else:
         print("You don't have an item by that name to drop.")
@@ -236,15 +240,14 @@ if __name__ == "__main__":
 
         for action in location.available_commands:
             print("-", action)
+        for item in location.items:
+            print("- pick up", item.name)
         if game.player.inventory != []:
             for item in game.player.inventory:
-                print("- drop", item) # TODO test whether it actually prints out properly
+                print("- drop", item.name) # TODO test whether it actually prints out properly
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()
-        while choice not in location.available_commands and choice not in menu:
-            print("That was an invalid option; try again.")
-            choice = input("\nEnter action: ").lower().strip()
 
         print("========")
         print("You decided to:", choice)
@@ -267,8 +270,8 @@ if __name__ == "__main__":
             if choice.startswith("go"):
                 direction = choice[3:].strip()  # Extract the direction
                 go(game, direction) #move to location
-            elif choice.startswith("pick"):
-                given_item = choice[5:].strip()
+            elif choice.startswith("pick up"):
+                given_item = choice[8:].strip()
                 pick_up_item(game, given_item)
             elif choice.startswith("drop"):
                 given_item = choice[5:].strip()
@@ -278,3 +281,4 @@ if __name__ == "__main__":
                 deposit(game, given_item)
             else:
                 print("Invalid input. Try again.")
+                choice = input("\nEnter action: ").lower().strip()
