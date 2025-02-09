@@ -6,6 +6,7 @@
       "brief_description": "You are in the midst of King's College Circle. Gerstein is to the East, Harthouse is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East. You see something shiny on the ground -- looks like a toonie?",
       "long_description": "You are in the midst of King's College Circle. It's usually not as crowded at this time of the day, but today it is exceptionally crowded because of the sunny weather. A group of students are playing frisbee, others are laying on the grass. One student is rushing to their next class, wearing a heavy-looking backpack and carrying a textbook in their arms. Gerstein Science information is to the East, Hart House is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East.",
       "available_commands": {
+        "pick up toonie": 1,
         "go east": 2,
         "go north east" :10,
         "go north": 20,
@@ -25,7 +26,7 @@
         "go south": 1,
         "go east": 3
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 3,
@@ -36,7 +37,7 @@
         "go west": 4,
         "go south": 2
       },
-      "items": [""] 
+      "items": [] 
     },
     {
       "id": 4,
@@ -46,7 +47,7 @@
       "available_commands": {
         "go south": 3
       },
-      "items": [""]
+      "items": ["usb drive"]
     },
     {
       "id": 20,
@@ -59,7 +60,7 @@
         "go west": 23,
         "go south": 1
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 21,
@@ -72,7 +73,7 @@
         "go west": 23,
         "go north": 24
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 22,
@@ -82,7 +83,7 @@
       "available_commands": {
         "go south": 20
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 23,
@@ -92,7 +93,7 @@
       "available_commands": {
         "go south": 20
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 24,
@@ -103,7 +104,7 @@
         "go south": 20,
         "go east": 25
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 25,
@@ -114,7 +115,7 @@
         "go south": 24,
         "go north": 26
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 26,
@@ -137,7 +138,7 @@
         "go east": 31,
         "go north": 32
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 31,
@@ -147,7 +148,7 @@
       "available_commands": {
         "go south": 30
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 32,
@@ -158,7 +159,7 @@
         "go south": 30,
         "go north": 33
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 33,
@@ -170,7 +171,7 @@
         "go west": 34,
         "go east": 35
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 34,
@@ -180,7 +181,7 @@
       "available_commands": {
         "go south": 33
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 35,
@@ -202,7 +203,7 @@
         "go south": 1,
         "go north": 41
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 41,
@@ -212,7 +213,7 @@
       "available_commands": {
         "go south": 40
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 50,
@@ -224,7 +225,7 @@
         "go north west": 51,
         "go north east": 53
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 51,
@@ -235,7 +236,7 @@
         "go south": 50,
         "go west": 52
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 52,
@@ -245,7 +246,7 @@
       "available_commands": {
         "go south": 51
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 53,
@@ -255,7 +256,7 @@
       "available_commands": {
         "go south": 50
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 60,
@@ -266,7 +267,7 @@
         "go south": 1,
         "go west": 61
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 61,
@@ -277,7 +278,7 @@
         "go south": 60,
         "go east": 62
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 62,
@@ -287,7 +288,7 @@
       "available_commands": {
         "go south": 61
       },
-      "items": [""]
+      "items": ["laptop charger"]
     },
     {
       "id": 10,
@@ -299,7 +300,7 @@
         "go west": 12,
         "go east": 11
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 11,
@@ -309,7 +310,7 @@
       "available_commands": {
         "go south": 10
       },
-      "items,": [""]
+      "items": []
     },
     {
       "id": 12,
@@ -322,7 +323,7 @@
         "go west": 14,
         "go north": 13
       },
-      "items": [""]
+      "items": ["Lucky Mug"]
     },
     {
       "id": 13,
@@ -332,7 +333,7 @@
       "available_commands": {
         "go south": 12
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 14,
@@ -342,7 +343,7 @@
       "available_commands": {
         "go south": 12
       },
-      "items": [""]
+      "items": []
     },
     {
       "id": 15,
@@ -352,9 +353,8 @@
       "available_commands": {
         "go south": 12
       },
-      "items": [""]
+      "items": []
     }
-
 
   ],
   "items": [
@@ -364,13 +364,6 @@
       "start_position": 1,
       "target_position": 4,
       "target_points": 5
-    },
-    {
-      "name":"",
-      "description": "none",
-      "start_position": -1,
-      "target_position": -1,
-      "target_points": -1
     },
     {
       "name": "dorm keys",
@@ -385,6 +378,13 @@
       "start_position": 35,
       "target_position": 34,
       "target_points": 7
+    },
+    {
+      "name": "usb drive",
+      "description": "looks like your lucky today (or maybe not). someone must've dropped a rare pokemon card",
+      "start_position": 4,
+      "target_position": 34,
+      "target_points": 15
     }
   ]
 }

@@ -37,7 +37,7 @@ class Location:
     # The only thing you must NOT change is the name of this class: Location.
     # All locations in your game MUST be represented as an instance of this class.
 
-    def __init__(self, location_id, brief_description, long_description, available_commands, items,
+    def __init__(self, location_id, name, brief_description, long_description, available_commands, items,
                  visited=False) -> None:
         """Initialize a new location.
 
@@ -45,6 +45,7 @@ class Location:
         """
 
         self.id_num = location_id
+        self.name = name
         self.brief_description = brief_description
         self.long_description = long_description
         self.available_commands = available_commands

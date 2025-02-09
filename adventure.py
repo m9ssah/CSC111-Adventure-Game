@@ -1,4 +1,3 @@
-
 """CSC111 Project 1: Text Adventure Game - Game Manager
 
 Instructions (READ THIS FIRST!)
@@ -85,7 +84,7 @@ class AdventureGame:
 
         locations = {}
         for loc_data in data['locations']:  # Go through each element associated with the 'locations' key in the file
-            location_obj = Location(loc_data['id'], loc_data['brief_description'], loc_data['long_description'],
+            location_obj = Location(loc_data['id'], loc_data["name"], loc_data['brief_description'], loc_data['long_description'],
                                     loc_data['available_commands'], loc_data["items"])
             locations[loc_data['id']] = location_obj
 
@@ -94,7 +93,6 @@ class AdventureGame:
             item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'], item_data['target_position'],
                             item_data['target_points'])
             items.append(item_obj)
-        print(loc_data)
         return locations, items
 
     def get_location(self, loc_id: Optional[int] = None) -> Location:
@@ -130,11 +128,12 @@ def go(game: AdventureGame, direction: str) -> None:
     direction : str
     """
     location = game.get_location()
-    if direction in location.available_commands: #irrelevant
-        new_location_id = location.available_commands[direction]
+    if f"go {direction}" in location.available_commands: #irrelevant
+        new_location_id = location.available_commands[f"go {direction}"]
         game.current_location_id = new_location_id
         new_location = game.get_location(new_location_id)
         print(f"You are now in: {new_location.name}!")
+
         # log the event
         event = Event(new_location_id, new_location.long_description, f"go {direction}")
         game.game_log.add_event(event, f"go {direction}")
@@ -157,8 +156,10 @@ def handle_score(player: Player) -> None:
 
 def pick_up_item(game: AdventureGame, given_item: Item) -> None:
     location = game.get_location()
+    print(location.items)
     # check if given_item is available
     item = next((item for item in location.items if item.name.lower() == given_item.lower()), None)
+    print(item)
     if item is not None:
         game.player.add_item(item)
         print(f"You have successfully picked up: {given_item}!")
@@ -171,7 +172,7 @@ def pick_up_item(game: AdventureGame, given_item: Item) -> None:
 def drop_item(game: AdventureGame, given_item: Item) -> None:
     location = game.get_location()
         # check if given_item is available
-    item = next((item for item in location.items if item.name.lower() == given_item.lower()), None)
+    item = next((item for item in location.items if item.lower() == given_item.lower()), None)
     if item is not None:
         game.player.remove_item(given_item)
         print(f"You have successfully dropped: {given_item}!")
@@ -186,6 +187,7 @@ def drop_item(game: AdventureGame, given_item: Item) -> None:
 def deposit(game: AdventureGame, given_item: Item) -> None:
     pass
 
+
 if __name__ == "__main__":
     # import python_ta
     # python_ta.check_all(config={
@@ -196,12 +198,10 @@ if __name__ == "__main__":
     game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
-
+    
     while game.ongoing:
-
-        location = game.get_location()
         game_log = EventList()
-
+        location = game.get_location()
         if not location.visited:
             event = Event(
                 id_num = location.id_num,
@@ -237,7 +237,6 @@ if __name__ == "__main__":
 
         print("========")
         print("You decided to:", choice)
-
         if choice in menu:
             if choice == "log":
                 game_log.display_events()
