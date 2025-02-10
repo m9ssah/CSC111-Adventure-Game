@@ -110,39 +110,78 @@ class AdventureGame:
 
 def handle_undo(game: AdventureGame) -> None:
     """
-    Handle the undo the command
+    Handle undoing the last command. If the last command is None, reset the game.
 
     Parameters
     ----------
     game : AdventureGame
     """
-    last_event = game.game_log.remove_last_event()
-    if last_event:
-        game.current_location_id = last_event.id_num
-        print("Undid most recent event")
-        print(f"You returned to: {game.get_location().brief_description}")
+    last_event = game.game_log.last
+
+    if last_event is None: # in case the player undoes an action that doesnt even exist
+        print("No valid actions to undo.")
+        return
+    
+    # Process undo logic for item-based actions
+    command_parts = last_event.description.split()
+    action = command_parts[0]
+    item_name = " ".join(command_parts[1:]) if len(command_parts) > 1 else ""
+
+    game.game_log.remove_last_event() #removing last event
+    # print(game.current_location_id)
+    game.current_location_id = last_event.id_num
+    # print(game.current_location_id)
+    
+    location = game.get_location()
+
+    if action not in ("pick", "drop", "deposit"):
+        return
+    else:
+        item = next((item for item in game._items if item.name.lower() == item_name.lower()), None)
+        print(item)
+        if item:
+            if action == "pick":
+                game.player.remove_item(item)
+                location.items.append(item)
+                print(f"Returned {item_name} to {location.name}")
+
+            elif action == "drop":
+                game.player.add_item(item)
+                location.items.remove(item)
+                print(f"Picked up {item_name} again")
+
+            elif action == "deposit":
+                game.player.add_item(item)
+                game.player.score -= item.target_points
+                print(f"Returned {item_name} to your inventory and deducted {item.target_points} points.")
+
+    print(f"Undid most recent event. You returned to: {location.name}.")
+
 
 def go(game: AdventureGame, direction: str) -> None:
     """
     Handle the go command according to a given direction.
-
-    Parameters
-    ----------
-    game : AdventureGame
-    direction : str
     """
     location = game.get_location()
-    if f"go {direction}" in location.available_commands: #irrelevant
+    if f"go {direction}" in location.available_commands:
         new_location_id = location.available_commands[f"go {direction}"]
+        previous_location_id = game.current_location_id  # Store current location before moving
         game.current_location_id = new_location_id
         new_location = game.get_location(new_location_id)
         print(f"You are now in: {new_location.name}!")
 
-        # log the event
-        event = Event(new_location_id, new_location.long_description, f"go {direction}")
+        # Log event: Store where we came from!
+        event = Event(
+            id_num=new_location_id, 
+            description=f"go {direction}", 
+            prev=game.game_log.last
+        )
+        event.previous_location = previous_location_id  # Store the previous location!
         game.game_log.add_event(event, f"go {direction}")
-    else: #irrelevant
-        print(f"Unable to move towards the {direction}") #irrelevant
+
+    else:
+        print(f"Unable to move towards the {direction}")
+
 
 def handle_score(player: Player) -> None:
     """
@@ -151,19 +190,11 @@ def handle_score(player: Player) -> None:
     Parameters
     ----------
     player : Player
-
-    Returns
-    -------
-    int
     """
     print(f"Your current score is: {player.score}")
 
 def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
     location = game.get_location()
-    
-    # Debugging output
-    print(f"DEBUG: Attempting to pick up '{given_item_name}'")
-    print(f"DEBUG: Items in {location.name}: {[item.name for item in location.items]}")
 
     # Find the item by name
     item_to_pick_up = next((item for item in location.items if item.name.strip().lower() == given_item_name.strip().lower()), None)
@@ -174,14 +205,24 @@ def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
         print(f"You have successfully picked up: {item_to_pick_up.name}!")
         # remove item from the location after picking it up:
         # Log the event
-        event = Event(game.current_location_id, f"picked up {item_to_pick_up.name}", None, None, game.game_log.last)
-        game.game_log.add_event(event, f"pick up {item_to_pick_up.name}")
+        event = Event(
+            id_num=game.current_location_id, 
+            description=f"pick {item_to_pick_up.name}", 
+            prev=game_log.last
+        )
+        game.game_log.add_event(event, f"pick {item_to_pick_up.name}")
     else:
         print(f"Cannot find '{given_item_name}'. Check spelling and try again.")
 
-
-
 def drop_item(game: AdventureGame, given_item_name: str) -> None:
+    """
+    Allows the user to drop a specific item if it is present in their inventory
+
+    Parameters
+    ----------
+    game : AdventureGame
+    given_item_name : the item name they want to drop
+    """
     # Find the item by name (case-insensitive)
     item_to_drop = next((item for item in game.player.inventory if item.name.lower() == given_item_name.lower()), None)
 
@@ -190,16 +231,50 @@ def drop_item(game: AdventureGame, given_item_name: str) -> None:
         game.get_location().items.append(item_to_drop)  # Add item back to the location
         print(f"You have successfully dropped: {item_to_drop.name}!")
         # log the event
-        event = Event(game.current_location_id, f"dropped {item_to_drop.name}", None, None, game_log.last)
+        event = Event(
+            id_num=game.current_location_id, 
+            description=f"drop {item_to_drop.name}",  
+            prev=game_log.last
+        )
         game.game_log.add_event(event, f"drop {item_to_drop.name}")
     else:
         print("You don't have an item by that name to drop.")
 
+def deposit(game: AdventureGame, given_item_name: str) -> None:
+    """
+    Allows the user to deposit the items they have collected all over campus to claim their points
+    The designated deposit room is the user's dorm (loc_id = 34)
+
+    Parameters
+    ----------
+    game : AdventureGame
+    given_item : Item
+    """
+    location = game.get_location()
+    if location.id_num != 34:
+        print("Unable to deposit items in current location, you must deposit everything in your dorm (HINT: it's in Knox College)")
+        return
+    
+    item_to_deposit = next((item for item in game.player.inventory if item.name.lower() == given_item_name.lower()), None)
+
+    if item_to_deposit is not None:
+        game.player.score += item_to_deposit.target_points
+        game.player.inventory.remove(item_to_deposit)
+        print(f"You have successfully deposited {item_to_deposit.name} and received {item_to_deposit.target_points}")
+
+        #log event
+        event = Event(
+            game.current_location_id,
+            f"deposit {item_to_deposit.name}",
+            None,
+            None,
+            game.game_log.last
+        )
+        game.game_log.add_event(event, f"deposit {item_to_deposit.name}")
+    else:
+        print("You have no items to deposit.")
 
 
-
-def deposit(game: AdventureGame, given_item: Item) -> None:
-    pass
 
 
 if __name__ == "__main__":
@@ -211,12 +286,12 @@ if __name__ == "__main__":
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
+    game.game_log = game_log # initializing game_log 
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
     
     while game.ongoing:
         location = game.get_location()
-
         if not location.visited:
             event = Event(
                 id_num = location.id_num,
@@ -233,15 +308,18 @@ if __name__ == "__main__":
         )
             print(location.brief_description)
         
-        game.game_log.add_event(event, choice)
+        # game.game_log.add_event(event, choice) TODO check if i should remove this
+        for item in location.items:
+            print(item.description)
+            print("- pick up", item.name)
 
         print("What to do? Choose from: look, inventory, score, undo, log, quit")
         print("At this location, you can also:")
 
+
         for action in location.available_commands:
             print("-", action)
-        for item in location.items:
-            print("- pick up", item.name)
+
         if game.player.inventory != []:
             for item in game.player.inventory:
                 print("- drop", item.name) # TODO test whether it actually prints out properly

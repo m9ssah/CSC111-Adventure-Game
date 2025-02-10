@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "King's College Circle",
-      "brief_description": "You are in the midst of King's College Circle. Gerstein is to the East, Harthouse is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East. You see something shiny on the ground -- looks like a toonie?",
+      "brief_description": "You are in the midst of King's College Circle. Gerstein is to the East, Harthouse is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East.",
       "long_description": "You are in the midst of King's College Circle. It's usually not as crowded at this time of the day, but today it is exceptionally crowded because of the sunny weather. A group of students are playing frisbee, others are laying on the grass. One student is rushing to their next class, wearing a heavy-looking backpack and carrying a textbook in their arms. Gerstein Science information is to the East, Hart House is to the North East, University College is to the North, Knox College is to the West, Convacation Hall is to the South East, Sandford Fleming Building is to the South, and the Medical Sciences Building is to the South East.",
       "available_commands": {
         "go east": 2,
@@ -119,8 +119,8 @@
     {
       "id": 26,
       "name": "Study Room",
-      "brief_description": "You are in the study room. The library is to the south. You notice your dorm keys under a chair alongside your Darth Vader keychain.",
-      "long_description": "The study room is eerily quiet, safe for the occasional scratching of pens on paper. The furniture is well-used, with carved initials decorating the wooden desks. As you shift your chair, something catches your eye—a glint of metal under one of the chairs. Your dorm keys! AND YOUR DARTH VADER KEYCHAIN. Seems like you left them here earlier. The library is to the south.",
+      "brief_description": "You are in the study room. The library is to the south. ",
+      "long_description": "The study room is eerily quiet, safe for the occasional scratching of pens on paper. The furniture is well-used, with carved initials decorating the wooden desks. As you shift your chair, something catches your eye—a glint of metal under one of the chairs. The library is to the south.",
       "available_commands": {
         "go south": 25,
         "pick up dorm keys": 26
@@ -366,21 +366,21 @@
     },
     {
       "name": "dorm keys",
-      "description": "Your dorm keys are on the floor, you must've forgotten them",
+      "description": "Your dorm keys! AND YOUR DARTH VADER KEYCHAIN. Seems like you left them here earlier.",
       "start_position": 26,
       "target_position": 34,
       "target_points": 10
     },
     {
       "name": "pokemon card",
-      "description": "looks like your lucky today (or maybe not). someone must've dropped a rare pokemon card",
+      "description": "Someone must've dropped a rare pokemon card. Looks like today's your lucky day (or maybe not).",
       "start_position": 35,
       "target_position": 34,
       "target_points": 7
     },
     {
       "name": "usb drive",
-      "description": "looks like your lucky today (or maybe not). someone must've dropped a rare pokemon card",
+      "description": "You see a small black chip. It's all your hard work in a USB drive on the floor.",
       "start_position": 4,
       "target_position": 34,
       "target_points": 15

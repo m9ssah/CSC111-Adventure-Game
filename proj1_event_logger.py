@@ -81,10 +81,14 @@ class EventList:
         """
         Display all events in chronological order.
         """
-        curr = self.first
-        while curr is not None:
-            print(f"Location: {curr.id_num}, Command: {curr.next_command}")
-            curr = curr.next
+        if self.first is None:
+            print("No events to display.")
+        else:
+            curr = self.first
+            while curr is not None:
+                print(f"Location: {curr.id_num}, Action Preformed: {curr.description}")
+                curr = curr.next
+        
 
     def is_empty(self) -> bool:
         """
@@ -103,8 +107,7 @@ class EventList:
 
         else:
             self.last.next_command = command
-            self.last.next = event
-            event.prev = self.last
+            self.last.next, event.prev = event, self.last
             self.last = event
 
     def remove_last_event(self) -> Optional[None]:  # updated this method to return the event removed
@@ -127,12 +130,6 @@ class EventList:
             self.last.prev.next = None
             self.last = self.last.prev
             return last_event
-
-    def undo(self) -> Optional[Event]:
-        """
-        Undo the last event and return it
-        """
-        return self.remove_last_event()
 
     def get_id_log(self) -> list[int]:
         """
