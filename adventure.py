@@ -118,7 +118,8 @@ def handle_undo(game: AdventureGame) -> None:
     """
     last_event = game.game_log.last
 
-    if last_event is None: # in case the player undoes an action that doesnt even exist
+
+    if last_event is game.game_log.first: # in case the player undoes an action that doesnt even exist
         print("No valid actions to undo.")
         return
     
@@ -127,10 +128,8 @@ def handle_undo(game: AdventureGame) -> None:
     action = command_parts[0]
     item_name = " ".join(command_parts[1:]) if len(command_parts) > 1 else ""
 
-    game.game_log.remove_last_event() #removing last event
-    # print(game.current_location_id)
-    game.current_location_id = last_event.id_num
-    # print(game.current_location_id)
+    last_event = game.game_log.remove_last_event()
+    game.current_location_id = last_event.prev.id_num
     
     location = game.get_location()
 
@@ -289,6 +288,11 @@ if __name__ == "__main__":
     game.game_log = game_log # initializing game_log 
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
+    first_event = Event(
+        id_num=1,
+        description="game start"
+    )
+    game_log.add_event(first_event)
     
     while game.ongoing:
         location = game.get_location()
