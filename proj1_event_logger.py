@@ -82,7 +82,6 @@ class EventList:
             while curr is not None:
                 print(f"Location: {curr.id_num}, Action Preformed: {curr.description}")
                 curr = curr.next
-        
 
     def is_empty(self) -> bool:
         """
@@ -137,10 +136,10 @@ class EventList:
             curr = curr.next
         return locations
 
+
 if __name__ == "__main__":
-    pass
-    # import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 120,
-    #     'disable': ['R1705', 'E9998', 'E9999']
-    # })
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 120,
+        'disable': ['R1705', 'E9998', 'E9999']
+    })

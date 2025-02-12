@@ -106,11 +106,11 @@ class AdventureGameSimulation:
 
 
 if __name__ == "__main__":
-    # import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 120,
-    #     'disable': ['R1705', 'E9998', 'E9999']
-    # })
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 120,
+        'disable': ['R1705', 'E9998', 'E9999']
+    })
 
     win_walkthrough = [
         'go east',
@@ -216,8 +216,9 @@ if __name__ == "__main__":
         'deposit dorm keys',
         'go south'
     ]
-    
-    expected_log = [1, 2, 3, 4, 3, 2, 1, 30, 32, 33, 35, 35, 33, 32, 30, 1, 40, 41, 40, 1, 50, 53, 50, 1, 10, 12, 14, 12, 10, 1, 20, 24, 25, 26, 25, 24, 20, 1, 30, 32, 33, 34, 33]
+
+    expected_log = [1, 2, 3, 4, 3, 2, 1, 30, 32, 33, 35, 35, 33, 32, 30, 1, 40, 41, 40, 1, 50, 53, 50, 1, 10, 12,
+                    14, 12, 10, 1, 20, 24, 25, 26, 25, 24, 20, 1, 30, 32, 33, 34, 33]
     assert expected_log == AdventureGameSimulation('game_data.json', 1, lose_demo).get_id_log()
 
     inventory_demo = [
@@ -225,8 +226,7 @@ if __name__ == "__main__":
         "go east",        # Move to Gerstein -1F
         "go west",        # Enter MADLab
         "pick up usb drive",  # Pick up USB Drive
-        "inventory"
-        ]    # Check inventory
+        "inventory"]    # Check inventory
     expected_log = [1, 2, 3, 4]
     assert expected_log == AdventureGameSimulation('game_data.json', 1, inventory_demo).get_id_log()
 

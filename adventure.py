@@ -20,13 +20,12 @@ This file is Copyright (c) 2025 CSC111 Teaching Team
 from __future__ import annotations
 import json
 from typing import Optional, Any
+import time
+import pygame
+import threading
 from game_entities import Location, Item, Player
 from proj1_event_logger import Event, EventList
-from os import environ
-environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
-import threading
-import pygame
-import time
+
 
 class AdventureGame:
     """A text adventure game class storing all location, item and map data.
@@ -49,6 +48,8 @@ class AdventureGame:
     _items: list[Item]
     current_location_id: int
     ongoing: bool
+    player: Player
+    game_log: EventList
 
     def __init__(self, game_data_file: str, initial_location: int) -> None:
         """
@@ -80,7 +81,8 @@ class AdventureGame:
         item_dict = {}
         items = []
         for item_data in data['items']:
-            item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'], item_data['target_position'],
+            item_obj = Item(item_data['name'], item_data['description'], 
+                            item_data['start_position'], item_data['target_position'],
                             item_data['target_points'])
             items.append(item_obj)
             item_dict[item_data["name"].lower()] = item_obj
@@ -156,6 +158,7 @@ def handle_undo(game: AdventureGame) -> None:
 
     print(f"Undid most recent event. You returned to: {location.name}.")
 
+
 def go(game: AdventureGame, direction: str) -> None:
     """
     Handle the go command according to a given direction.
@@ -163,7 +166,8 @@ def go(game: AdventureGame, direction: str) -> None:
     location = game.get_location()
     if f"go {direction}" in location.available_commands:
         new_location_id = location.available_commands[f"go {direction}"]
-        if new_location_id == dorm_room_id and not any(item.name.lower() == "dorm keys" for item in game.player.inventory):
+        if new_location_id == dorm_room_id and not \
+            any(item.name.lower() == "dorm keys" for item in game.player.inventory):
             print("Your dorm room seems to be locked and you don't have your keys with you.")
             print("You must first look for your keys then you may enter.")
             return
@@ -184,11 +188,13 @@ def go(game: AdventureGame, direction: str) -> None:
     else:
         print(f"Unable to move towards the {direction}")
 
+
 def handle_score(player: Player) -> None:
     """
     Handles the score method of the player class to display the current score.
     """
     print(f"Your current score is: {player.score}")
+
 
 def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
     """
@@ -197,7 +203,7 @@ def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
     location = game.get_location()
 
     # Find the item by name
-    item_to_pick_up = game.get_item(given_item_name)  # next((item for item in location.items if item.name.strip().lower() == given_item_name.strip().lower()), None)
+    item_to_pick_up = game.get_item(given_item_name)
 
     if item_to_pick_up is not None:
         game.player.add_item(item_to_pick_up)
@@ -213,6 +219,7 @@ def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
         game.game_log.add_event(event, f"pick {item_to_pick_up.name}")
     else:
         print(f"Cannot find '{given_item_name}'. Check spelling and try again.")
+
 
 def drop_item(game: AdventureGame, given_item_name: str) -> None:
     """
@@ -235,6 +242,7 @@ def drop_item(game: AdventureGame, given_item_name: str) -> None:
     else:
         print("You don't have an item by that name to drop.")
 
+
 def deposit(game: AdventureGame, given_item_name: str) -> None:
     """
     Allows the user to deposit the items they have collected all over campus to claim their points
@@ -242,7 +250,8 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
     """
     location = game.get_location()
     if location.id_num != 34:
-        print("Unable to deposit items in current location, you must deposit everything in your dorm (HINT: it's in Knox College)")
+        print("Unable to deposit items in current location, you must deposit everything in your\
+               dorm (HINT: it's in Knox College)")
         return
 
     item_to_deposit = game.get_item(given_item_name)  # next((item for item in game.player.inventory if item.name.lower() == given_item_name.lower()), None)
@@ -252,7 +261,7 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
         game.player.inventory.remove(item_to_deposit)
         print(f"You have successfully deposited {item_to_deposit.name} and received {item_to_deposit.target_points}")
         deposited_items.add(str(item_to_deposit.name))
-        #log event
+        # log event
         event = Event(
             game.current_location_id,
             f"deposit {item_to_deposit.name}",
@@ -263,6 +272,7 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
         game.game_log.add_event(event, f"deposit {item_to_deposit.name}")
     else:
         print("You have no items to deposit.")
+
 
 def display_location_options(game: AdventureGame) -> None:
     """Display available actions at the current location."""
@@ -286,6 +296,7 @@ def display_location_options(game: AdventureGame) -> None:
     if location.id_num == dorm_room_id:
         for item in game.player.inventory:
             print(f"- deposit {item.name}")
+
 
 def play_music(game: AdventureGame) -> None:
     """
@@ -314,21 +325,21 @@ def play_music(game: AdventureGame) -> None:
 
 
 if __name__ == "__main__":
-    # import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 120,
-    #     'disable': ['R1705', 'E9998', 'E9999']
-    # })
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 120,
+        'disable': ['R1705', 'E9998', 'E9999']
+    })
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
-    game.game_log = game_log # initializing game_log 
+    game.game_log = game_log  # initializing game_log 
     music_thread = threading.Thread(target=play_music, args=(game,), daemon=True)
     music_thread.start()
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
     first_event = Event(
-        id_num=1,
+        id_num = 1,
         description="game start"
     )
     game_log.add_event(first_event)
@@ -339,19 +350,19 @@ if __name__ == "__main__":
         location = game.get_location()
         if not location.visited:
             event = Event(
-                id_num = location.id_num,
-                description = location.long_description,
-                next_command = choice
-            )
+                id_num=location.id_num,
+                description=location.long_description,
+                next_command=choice
+                )
             location.visited = True
             print(location.long_description)
             location.start_dialogue(game)
         else:
             event = Event(
-            id_num = location.id_num,
-            description = location.brief_description,
-            next_command = choice
-        )
+                id_num=location.id_num,
+                description=location.brief_description,
+                next_command=choice
+                )
             print(location.brief_description)
 
         display_location_options(game)
@@ -376,10 +387,10 @@ if __name__ == "__main__":
                 print("Quiting game...")
                 game.ongoing = False
                 
-        else: # Handle non-menu actions
+        else:  # Handle non-menu actions
             if choice.startswith("go"):
                 direction = choice[3:].strip()  # Extract the direction
-                go(game, direction) #move to location
+                go(game, direction)  # move to location
             elif choice.startswith("pick up"):
                 given_item = choice[8:].strip()
                 pick_up_item(game, given_item)

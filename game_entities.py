@@ -19,6 +19,7 @@ please consult our Course Syllabus.
 This file is Copyright (c) 2025 CSC111 Teaching Team
 """
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -45,6 +46,17 @@ class Location:
         - long_description != ""
         - music != ""
     """
+    id_num: int
+    name: str
+    brief_description: str
+    long_description: str
+    available_commands: dict[str, int]
+    items: list
+    visited: bool
+    dialogue: dict
+    current_dialogue: dict
+    conversation_success: bool
+    music: str
 
     # This is just a suggested starter class for Location.
     # You may change/add parameters and the data available for each Location object as you see fit.
@@ -54,7 +66,7 @@ class Location:
 
     def __init__(self, location_id: int, name: str, brief_description: str, long_description: str,
                  available_commands: dict[str, int], items: list,
-                 visited=False, dialogue=None, music=None) -> None:
+                 visited: bool = False, dialogue: Optional[dict] = None, music: Optional[str] = None) -> None:
         """Initialize a new location, along with its dialogue and other attributes."""
 
         self.id_num = location_id
@@ -162,7 +174,11 @@ class Item:
 
 
 class Player():
-    def __init__(self):
+    """A player in our text adventure game world."""
+    inventory: list[Item]
+    score: int
+
+    def __init__(self) -> None:
         self.inventory = []
         self.score = 0
 
