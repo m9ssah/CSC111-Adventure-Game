@@ -92,16 +92,6 @@ encoded word: **V YBIR PFP111**":
 
                 if player_guess == correct_answer:
                     print("\n✅ Correct! The barista hands you the mug.")
-                    # item = game.get_item("lucky mug")
-                    # game.player.add_item(item)
-                    self.conversation_success = True
-                    # TODO Delete:
-                    #  event = Event(
-                    #     id_num = game.current_location,
-                    #     description = f"retrieved {item.name}",
-                    #     prev = game_log.last
-                    # )
-                    # game.game_log.add_event(event, f"retrieved {item.name}")
                 else:
                     print("\n❌ Wrong answer. The barista shakes their head. 'Nope. Guess it isn't yours after all.")
                     self.conversation_success = False
@@ -180,7 +170,7 @@ class Player():
         """
         Displays a list of items that are currently present in a player's inventory
         """
-        if self.inventory == [] or self.inventory is None: # TODO: check if u can remove one of them (redundancy)
+        if self.inventory == [] or self.inventory is None:
             print("Oops, seems like you have nothing in your inventory.")
         else:
             print("Inventory:", ", ".join(item.name for item in self.inventory))
@@ -206,9 +196,8 @@ class Player():
 
 
 if __name__ == "__main__":
-    pass
-    # import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 120,
-    #     'disable': ['R1705', 'E9998', 'E9999']
-    # })
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 120,
+        'disable': ['R1705', 'E9998', 'E9999']
+    })

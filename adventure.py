@@ -251,7 +251,7 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
         game.player.score += item_to_deposit.target_points
         game.player.inventory.remove(item_to_deposit)
         print(f"You have successfully deposited {item_to_deposit.name} and received {item_to_deposit.target_points}")
-        deposited_items.add(str(item_to_deposit))
+        deposited_items.add(str(item_to_deposit.name))
         #log event
         event = Event(
             game.current_location_id,
@@ -398,7 +398,7 @@ if __name__ == "__main__":
             print("Game Over")
             game.ongoing = False
 
-        if deposited_items == {"usb drive", "laptop charger", "lucky mug"}:
+        if {"usb drive", "laptop charger", "lucky mug"} in deposited_items:
             print("You have successfully found all the items you lost!")
             print("Congratulations, the game has ended...")
             game.ongoing = False

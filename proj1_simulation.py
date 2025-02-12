@@ -112,32 +112,148 @@ if __name__ == "__main__":
     #     'disable': ['R1705', 'E9998', 'E9999']
     # })
 
-    # TODO: Modify the code below to provide a walkthrough of commands needed to win and lose the game
-    win_walkthrough = []  # Create a list of all the commands needed to walk through your game to win it
-    expected_log = []  # Update this log list to include the IDs of all locations that would be visited
-    # Uncomment the line below to test your walkthrough
-    assert expected_log == AdventureGameSimulation('game_data.json', 1, win_walkthrough)
+    win_walkthrough = [
+        'go east',
+        'go east',
+        'go west',
+        'pick up usb drive',
+        'go south',
+        'go south',
+        'go south',
+        'go north east',
+        'go west',
+        'go west',
+        1,
+        1,
+        1,
+        'I LOVE CSC111',
+        'pick up lucky mug'
+        'go south',
+        'go south',
+        'go south',
+        'go north',
+        'go north',
+        'go east',
+        'go north',
+        'pick up dorm keys',
+        'go south',
+        'go south',
+        'go south',
+        'go south',
+        'go south east',
+        'go west',
+        'go east',
+        'pick up laptop charger',
+        'go south',
+        'go south',
+        'go south',
+        'go west',
+        'go north',
+        'go north',
+        'go west',
+        'deposit usb drive',
+        'deposit laptop charger',
+        'deposit lucky mug'
+
+    ]  # Create a list of all the commands needed to walk through your game to win it
+    expected_log = [1, 2, 3, 4, 3, 2, 1, 10, 12, 14, 12, 10, 11, 10, 1, 50, 1, 60, 61, 62, 61, 60, 1, 30, 32, 33, 34]
+    assert expected_log == AdventureGameSimulation('game_data.json', 1, win_walkthrough).get_id_log()
 
     # Create a list of all the commands needed to walk through your game to reach a 'game over' state
-    lose_demo = []
-    expected_log = []  # Update this log list to include the IDs of all locations that would be visited
-    # Uncomment the line below to test your demo
-    assert expected_log == AdventureGameSimulation('game_data.json', 1, lose_demo)
+    lose_demo = [
+        'pick up toonie',
+        'go east',
+        'go east',
+        'go west',
+        'pick up usb drive',
+        'go south',
+        'go south',
+        'drop usb drive',
+        'go south',
+        'go west',
+        'go north',
+        'go north',
+        'go east',
+        'pick up pokemon card',
+        'go south',
+        'go south',
+        'go south',
+        'go south',
+        'go south west',
+        'drop toonie',
+        'go north',
+        'go south',
+        'go south',
+        'go south',
+        'go north east',
+        'go south',
+        'go south',
+        'go north east',
+        'go west',
+        'go west',
+        3,
+        2,
+        2,
+        1,
+        "Random",
+        'go south',
+        'drop pokemon cord',
+        'go south',
+        'go south',
+        'go north',
+        'go north',
+        'go east',
+        'go north',
+        'pick up dorm keys',
+        'go south',
+        'go south',
+        'go south',
+        'go south',
+        'go west',
+        'go north',
+        'go north',
+        'go west',
+        'deposit dorm keys',
+        'go south'
+    ]
+    
+    expected_log = [1, 2, 3, 4, 3, 2, 1, 30, 32, 33, 35, 35, 33, 32, 30, 1, 40, 41, 40, 1, 50, 53, 50, 1, 10, 12, 14, 12, 10, 1, 20, 24, 25, 26, 25, 24, 20, 1, 30, 32, 33, 34, 33]
+    assert expected_log == AdventureGameSimulation('game_data.json', 1, lose_demo).get_id_log()
 
-    # TODO: Add code below to provide walkthroughs that show off certain features of the game
-    # TODO: Create a list of commands involving visiting locations, picking up items, and then
-    #   checking the inventory, your list must include the "inventory" command at least once
-    # inventory_demo = [..., "inventory", ...]
-    # expected_log = []
-    # assert expected_log == AdventureGameSimulation(...)
+    inventory_demo = [
+        "go east",        # Move to Gerstein 1F
+        "go east",        # Move to Gerstein -1F
+        "go west",        # Enter MADLab
+        "pick up usb drive",  # Pick up USB Drive
+        "inventory"
+        ]    # Check inventory
+    expected_log = [1, 2, 3, 4]
+    assert expected_log == AdventureGameSimulation('game_data.json', 1, inventory_demo).get_id_log()
 
-    # scores_demo = [..., "score", ...]
-    # expected_log = []
-    # assert expected_log == AdventureGameSimulation(...)
+    scores_demo = [
+        'pick up toonie',
+        'go north',
+        'go north',
+        'go east',
+        'go north',
+        'pick up dorm keys',
+        'go south',
+        'go south',
+        'go south',
+        'go south',
+        'go west',
+        'go north',
+        'go north',
+        'go west',
+        'deposit toonie',
+        'score'
+    ]
+    expected_log = [1, 20, 24, 25, 26, 25, 24, 20, 1, 30, 32, 33, 34]
+    assert expected_log == AdventureGameSimulation('game_data.json', 1, scores_demo).get_id_log()
+
+    # enhancement_demo = ['
 
     # Add more enhancement_demos if you have more enhancements
     # enhancement1_demo = [...]
     # expected_log = []
     # assert expected_log == AdventureGameSimulation(...)
-
-    # Note: You can add more code below for your own testing purposes

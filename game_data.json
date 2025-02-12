@@ -118,8 +118,7 @@
       "brief_description": "You are in the study room. The library is to the south. ",
       "long_description": "The study room is eerily quiet, safe for the occasional scratching of pens on paper. The furniture is well-used, with carved initials decorating the wooden desks. As you shift your chair, something catches your eye—a glint of metal under one of the chairs. The library is to the south.",
       "available_commands": {
-        "go south": 25,
-        "pick up dorm keys": 26
+        "go south": 25
       },
       "items": ["dorm keys"],
       "music": "UC_audio.mp3"
@@ -246,7 +245,7 @@
     },
     {
       "id": 52,
-      "name": "Engineering and Computer Science Building",
+      "name": "Engineering and Computer Science Library",
       "brief_description": "You are in the Engineering and Computer Science Library. The main hallway is to the south",
       "long_description": "The library is filled with the quiet buzz of concentration. Rows of workstations hum with activity, screens glowing with lines of code and complex equations. Reference books on everything from machine learning to electrical engineering line the shelves. The main hallway is to the south",
       "available_commands": {
