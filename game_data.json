@@ -293,7 +293,7 @@
       "id": 10,
       "name": "Hart House 1F",
       "brief_description": "You are on the first floor of Hart House. King's College Circle is to the south. There is an information center to the north, a stairway to the west, and the quad is to the east.",
-      "long_description": "The first floor of Hart House is grand yet welcoming, with high ceilings and historic décor. The sound of classical music drifts from a nearby rehearsal room, blending with the murmur of students asking for event details at the information center to the north. The stairway to the west leads upward, while the quad to the east offers a breath of fresh air.",
+      "long_description": "The first floor of Hart House is grand yet welcoming, with high ceilings and historic décor. The sound of classical music drifts from a nearby rehearsal room, blending with the murmur of students asking for event details at the information center to the north. The stairway to the west leads downstairs, while the quad to the east offers a breath of fresh air.",
       "available_commands": {
         "go south": 1,
         "go west": 12,
@@ -315,14 +315,14 @@
       "id": 12,
       "name": "Hart House -1F",
       "brief_description": "You are in the basement of Hart House. The fitness center is to the north, the Arbor Room is to the west, and the student lounge is to the east. The stairway back up is to the south",
-      "long_description": "The basement of Hart House is a lively hub of student activity. To the north, the fitness center is alive with the sound of weights clanking and treadmills whirring. To the west, the Arbor Room offers a cozy café for quiet study, while to the east, the student lounge provides a space to relax and socialize. The stairway back up is to the south.",
+      "long_description": "The basement of Hart House is a lively hub of student activity. To the north, the fitness center is alive with the sound of weights clanking and treadmills whirring. To the west, the Arbor Room offers a cozy cafe for quiet study, while to the east, the student lounge provides a space to relax and socialize. The stairway back up is to the south.",
       "available_commands": {
         "go east": 15,
         "go south": 10,
         "go west": 14,
         "go north": 13
       },
-      "items": ["Lucky Mug"]
+      "items": []
     },
     {
       "id": 13,
@@ -342,7 +342,157 @@
       "available_commands": {
         "go south": 12
       },
-      "items": []
+      "items": ["lucky mug"],
+      "dialogue": {
+        "text": "You approach the counter and point to the mug. 'Hey, that's my lucky mug!'",
+        "options": {
+          "1": {
+            "text": "Can I have it back, please?",
+            "next": "barista_challenge"
+          },
+          "2": {
+            "text": "I left my mug here earlier. That must be it.",
+            "next": "barista_challenge"
+          },
+          "3": {
+            "text": "Hey, you found my mug! Mind handing it over?",
+            "next": "barista_challenge"
+          }
+        },
+        "branches": {
+          "barista_challenge": {
+            "text": "The barista raises an eyebrow. 'Lots of people leave mugs here. If it is really yours...prove it.'",
+            "options": {
+              "1": {
+                "text": "Ummmm, I think it has my name on the bottom?",
+                "next": "barista_test"
+              },
+              "2": {
+                "text": "It is special to me! I can describe it.",
+                "next": "barista_unsure"
+              },
+              "3": {
+                "text": "PLEASE GIVE IT BACK I SWEAR IT'S MINE",
+                "next": "barista_annoyed"
+              }
+            }
+          },
+          "barista_test": {
+            "text": "The barista smirks. 'Yeah, there's something written under it… but it almost looks like gibberish. Hold on, I think it's a **Caesar cipher**. If it's really yours, you should be able to decode it.'",
+            "options": {
+              "1": {
+                "text": "Alright, guess I'll give it a shot.",
+                "next": "cipher_puzzle"
+              },
+              "2": {
+                "text": "Can I get a hint?",
+                "next": "barista_hint"
+              },
+              "3": {
+                "text": "Forget it. This is absolutely preposterous.",
+                "next": "barista_shrug"
+              }
+            }
+          },
+          "cipher_puzzle": {
+            "text": "The barista flips the mug and reveals the encoded word: **V YBIR PFP111**",
+            "options": {
+              "1": {
+                "text": "The answer is 'I LOVE CSC111'",
+                "next": "barista_convinced",
+                "effects": {
+                  "give_item": "lucky mug"
+                }
+              },
+              "2": {
+                "text": "Uh… 'U EIDF IER444'?",
+                "next": "barista_wrong"
+              },
+              "3": {
+                "text": "Let me think for a moment.",
+                "next": "end"
+              }
+            }
+          },
+          "barista_hint": {
+            "text": "The barista leans forward. 'Okay, here's a hint: The letters are shifted **13 places forward** in the alphabet. Shift them back.'",
+            "options": {
+              "1": {
+                "text": "Okay, let me try now.",
+                "next": "cipher_puzzle"
+              },
+              "2": {
+                "text": "Nope, still too hard.",
+                "next": "barista_shrug"
+              }
+            }
+          },
+          "barista_wrong": {
+            "text": "The barista shakes their head. 'Nope, that's not it. Try again.'",
+            "options": {
+              "1": {
+                "text": "Let me try again!",
+                "next": "cipher_puzzle"
+              },
+              "2": {
+                "text": "Ugh, this is unfair!",
+                "next": "barista_shrug"
+              }
+            }
+          },
+          "barista_unsure": {
+            "text": "The barista crosses their arms. 'Alright, describe something unique about it.'",
+            "options": {
+              "1": {
+                "text": "It has tea stains inside.",
+                "next": "barista_convinced",
+                "effects": {
+                  "give_item": "lucky mug"
+                }
+              },
+              "2": {
+                "text": "It's completely clean.",
+                "next": "barista_wrong"
+              }
+            }
+          },
+          "barista_annoyed": {
+            "text": "The barista frowns. 'Well, now I'm definitely not giving it to you.'",
+            "options": {
+              "1": {
+                "text": "I'm sorry, let me try again.",
+                "next": "barista_challenge"
+              },
+              "2": {
+                "text": "Fine. Keep it.",
+                "next": "end"
+              }
+            }
+          },
+          "barista_shrug": {
+            "text": "The barista shrugs. 'No code, no mug. That's the rule.'",
+            "options": {
+              "1": {
+                "text": "Fine, I'll figure it out.",
+                "next": "cipher_puzzle"
+              },
+              "2": {
+                "text": "I give up.",
+                "next": "end"
+              }
+            }
+          },
+          "barista_convinced": {
+            "text": "The barista grins. 'Alright, you got it. Here's your mug.'",
+            "options": {
+              "1": {
+                "text": "Thanks.",
+                "next": "end"
+              }
+            }
+          }
+        }
+      }
     },
     {
       "id": 15,
@@ -384,6 +534,13 @@
       "start_position": 4,
       "target_position": 34,
       "target_points": 15
+    },
+    {
+      "name": "lucky mug",
+      "description": "You catch a glimpse of your lucky mug on the drying rack by a barista. You rush to speak to her.",
+      "start_position": 14,
+      "target_position": 34,
+      "target_points": 10
     }
   ]
 }

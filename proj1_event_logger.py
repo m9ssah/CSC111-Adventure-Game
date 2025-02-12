@@ -39,12 +39,6 @@ class Event:
     - prev: Event object representing the previous event in the game, None if this is the first game event
     """
 
-    # NOTES:
-    # This is proj1_event_logger (separate from the ex1 file). In this file, you may add new attributes/methods,
-    # or modify the names or types of provided attributes/methods, as needed for your game.
-    # If you want to create a special type of Event for your game that requires a different
-    # set of attributes, you can create new classes using inheritance, as well.
-
     id_num: int
     description: str
     next_command: Optional[str] = None
