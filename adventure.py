@@ -22,7 +22,11 @@ import json
 from typing import Optional, Any
 from game_entities import Location, Item, Player
 from proj1_event_logger import Event, EventList
-
+from os import environ
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+import threading
+import pygame
+import time
 
 class AdventureGame:
     """A text adventure game class storing all location, item and map data.
@@ -88,7 +92,7 @@ class AdventureGame:
 
             location_obj = Location(loc_data['id'], loc_data["name"], loc_data['brief_description'],
                                     loc_data['long_description'], loc_data['available_commands'], 
-                                    item_objects, dialogue=dialogue)
+                                    item_objects, dialogue=dialogue, music=loc_data.get('music', None))
             locations[loc_data['id']] = location_obj
 
         return locations, items
@@ -275,6 +279,31 @@ def display_location_options(game: AdventureGame) -> None:
         for item in game.player.inventory:
             print(f"- drop {item.name}")
 
+def play_music(game: AdventureGame) -> None:
+    """
+    Plays background music based on the player's current location.
+    """
+    pygame.mixer.init()
+    pygame.mixer.music.set_volume(1)  # Set volume
+
+    current_music = None  # Track currently playing music
+    previous_location = None  # Track last known location
+
+    while game.ongoing:
+        if game.current_location_id != previous_location:
+            previous_location = game.current_location_id
+            location = game.get_location()
+
+            if location.music:
+                if location.music != current_music:  # Only change if needed
+                    pygame.mixer.music.load(location.music)
+                    pygame.mixer.music.play(-1)  # Loop indefinitely
+                    current_music = location.music
+            else:
+                pygame.mixer.music.stop()  # Stop if no music is assigned
+
+        time.sleep(0.1)  # Check location every second
+
 
 if __name__ == "__main__":
     # import python_ta
@@ -286,6 +315,8 @@ if __name__ == "__main__":
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
     game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
     game.game_log = game_log # initializing game_log 
+    music_thread = threading.Thread(target=play_music, args=(game,), daemon=True)
+    music_thread.start()
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
     first_event = Event(

@@ -14,7 +14,8 @@
         "go south": 50,
         "go south east": 60
       },
-      "items": ["toonie"]
+      "items": ["toonie"],
+      "music": "main_theme.mp3"
     },
     {
       "id": 2,
@@ -25,7 +26,8 @@
         "go south": 1,
         "go east": 3
       },
-      "items": []
+      "items": [],
+      "music": "gerstein_audio.mp3"
     },
     {
       "id": 3,
@@ -36,7 +38,8 @@
         "go west": 4,
         "go south": 2
       },
-      "items": [] 
+      "items": [],
+      "music": "gerstein_audio.mp3"
     },
     {
       "id": 4,
@@ -46,7 +49,8 @@
       "available_commands": {
         "go south": 3
       },
-      "items": ["usb drive"]
+      "items": ["usb drive"],
+      "music": "gerstein_audio.mp3"
     },
     {
       "id": 20,
@@ -59,7 +63,8 @@
         "go west": 23,
         "go south": 1
       },
-      "items": []
+      "items": [],
+      "music": "UC_audio.mp3"
     },
     {
       "id": 21,
@@ -72,7 +77,8 @@
         "go west": 23,
         "go north": 24
       },
-      "items": []
+      "items": [],
+      "music": "UC_audio.mp3"
     },
     {
       "id": 22,
@@ -82,7 +88,8 @@
       "available_commands": {
         "go south": 20
       },
-      "items": []
+      "items": [],
+      "music": "UC_audio.mp3"
     },
     {
       "id": 23,
@@ -92,7 +99,8 @@
       "available_commands": {
         "go south": 20
       },
-      "items": []
+      "items": [],
+      "music": "UC_audio.mp3"
     },
     {
       "id": 24,
@@ -103,7 +111,8 @@
         "go south": 20,
         "go east": 25
       },
-      "items": []
+      "items": [],
+      "music": "UC_audio.mp3"
     },
     {
       "id": 25,
@@ -114,7 +123,8 @@
         "go south": 24,
         "go north": 26
       },
-      "items": []
+      "items": [],
+      "music": "UC_audio.mp3"
     },
     {
       "id": 26,
@@ -125,7 +135,8 @@
         "go south": 25,
         "pick up dorm keys": 26
       },
-      "items": ["dorm keys"]
+      "items": ["dorm keys"],
+      "music": "UC_audio.mp3"
     },
     {
       "id": 30,
@@ -137,7 +148,8 @@
         "go east": 31,
         "go north": 32
       },
-      "items": []
+      "items": [],
+      "music": "knox_audio.mp3"
     },
     {
       "id": 31,
@@ -147,7 +159,8 @@
       "available_commands": {
         "go south": 30
       },
-      "items": []
+      "items": [],
+      "music": "knox_audio.mp3"
     },
     {
       "id": 32,
@@ -158,7 +171,8 @@
         "go south": 30,
         "go north": 33
       },
-      "items": []
+      "items": [],
+      "music": "knox_audio.mp3"
     },
     {
       "id": 33,
@@ -170,7 +184,8 @@
         "go west": 34,
         "go east": 35
       },
-      "items": []
+      "items": [],
+      "music": "knox_audio.mp3"
     },
     {
       "id": 34,
@@ -180,7 +195,8 @@
       "available_commands": {
         "go south": 33
       },
-      "items": []
+      "items": [],
+      "music": "knox_audio.mp3"
     },
     {
       "id": 35,
@@ -191,7 +207,8 @@
         "go south": 33,
         "pick up pokemon card": 35
       },
-      "items": ["pokemon card"]
+      "items": ["pokemon card"],
+      "music": "knox_audio.mp3"
     },
     {
       "id": 40,
@@ -202,7 +219,8 @@
         "go south": 1,
         "go north": 41
       },
-      "items": []
+      "items": [],
+      "music": "convocation_audio.mp3"
     },
     {
       "id": 41,
@@ -212,7 +230,8 @@
       "available_commands": {
         "go south": 40
       },
-      "items": []
+      "items": [],
+      "music": "convocation_audio.mp3"
     },
     {
       "id": 50,
@@ -224,7 +243,8 @@
         "go north west": 51,
         "go north east": 53
       },
-      "items": []
+      "items": [],
+      "music": "sandford_audio.mp3"
     },
     {
       "id": 51,
@@ -235,7 +255,8 @@
         "go south": 50,
         "go west": 52
       },
-      "items": []
+      "items": [],
+      "music": "sandford_audio.mp3"
     },
     {
       "id": 52,
@@ -245,7 +266,8 @@
       "available_commands": {
         "go south": 51
       },
-      "items": []
+      "items": [],
+      "music": "sandford_audio.mp3"
     },
     {
       "id": 53,
@@ -255,7 +277,8 @@
       "available_commands": {
         "go south": 50
       },
-      "items": []
+      "items": [],
+      "music": "sandford_audio.mp3"
     },
     {
       "id": 60,
@@ -266,7 +289,8 @@
         "go south": 1,
         "go west": 61
       },
-      "items": []
+      "items": [],
+      "music": "med_sci_audio.mp3"
     },
     {
       "id": 61,
@@ -277,7 +301,8 @@
         "go south": 60,
         "go east": 62
       },
-      "items": []
+      "items": [],
+      "music": "med_sci_audio.mp3"
     },
     {
       "id": 62,
@@ -287,7 +312,8 @@
       "available_commands": {
         "go south": 61
       },
-      "items": ["laptop charger"]
+      "items": ["laptop charger"],
+      "music": "med_sci_audio.mp3"
     },
     {
       "id": 10,
@@ -299,7 +325,8 @@
         "go west": 12,
         "go east": 11
       },
-      "items": []
+      "items": [],
+      "music": "hart_house_audio.mp3"
     },
     {
       "id": 11,
@@ -309,7 +336,8 @@
       "available_commands": {
         "go south": 10
       },
-      "items": []
+      "items": [],
+      "music": "hart_house_audio.mp3"
     },
     {
       "id": 12,
@@ -322,7 +350,8 @@
         "go west": 14,
         "go north": 13
       },
-      "items": []
+      "items": [],
+      "music": "hart_house_audio.mp3"
     },
     {
       "id": 13,
@@ -332,17 +361,19 @@
       "available_commands": {
         "go south": 12
       },
-      "items": []
+      "items": [],
+      "music": "hart_house_audio.mp3"
     },
     {
       "id": 14,
       "name": "Arbor Room",
-      "brief_description": "You are in the Arbor Room, a cozy café in the basement of Hart House. The hallway is to the south.",
+      "brief_description": "You are in the Arbor Room, a cozy cafe in the basement of Hart House. The hallway is to the south.",
       "long_description": "The Arbor Room is a peaceful retreat from the campus rush. The scent of freshly brewed coffee and warm pastries fills the air. A few students sit at wooden tables, some reading, others deep in quiet conversation. The lighting is dim and cozy, adding to the welcoming atmosphere. The hallway leading back is to the south",
       "available_commands": {
         "go south": 12
       },
       "items": ["lucky mug"],
+      "music": "hart_house_audio.mp3",
       "dialogue": {
         "text": "You approach the counter and point to the mug. 'Hey, that's my lucky mug!'",
         "options": {
@@ -378,7 +409,7 @@
             }
           },
           "barista_test": {
-            "text": "The barista smirks. 'Yeah, there's something written under it… but it almost looks like gibberish. Hold on, I think it's a **Caesar cipher**. If it's really yours, you should be able to decode it.'",
+            "text": "The barista smirks. 'Yeah, there's something written under it... but it almost looks like gibberish. Hold on, I think it's a **Caesar cipher**. If it's really yours, you should be able to decode it.'",
             "options": {
               "1": {
                 "text": "Alright, guess I'll give it a shot.",
@@ -498,11 +529,12 @@
       "id": 15,
       "name": "Student Lounge",
       "brief_description": "You are in the Hart House Student Lounge. The hallway is to the south.",
-      "long_description": "The student lounge is a comfortable space filled with plush chairs and couches. A few students are engaged in a heated board game match, while others scroll through their phones or chat quietly. A bulletin board nearby is cluttered with event posters and club announcements. The hallway leading back is to the south.",
+      "long_description": "The student lounge is a comfortable space filled with plush chairs and couches. A few students are engaged in a heated board game match, while others scroll through their phones or chat quietly. A bulletin board nearby is cluttered with event posters and club announcements. You catch a glimpse of your lucky mug on the drying rack. The hallway leading back is to the south.",
       "available_commands": {
         "go south": 12
       },
-      "items": []
+      "items": [],
+      "music": "hart_house_audio.mp3"
     }
 
   ],
@@ -537,7 +569,7 @@
     },
     {
       "name": "lucky mug",
-      "description": "You catch a glimpse of your lucky mug on the drying rack by a barista. You rush to speak to her.",
+      "description": "The barista placed your lucky mug on the countertop.",
       "start_position": 14,
       "target_position": 34,
       "target_points": 10

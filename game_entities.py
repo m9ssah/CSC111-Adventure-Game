@@ -35,12 +35,15 @@ class Location:
         - visited: whether the user has already been in this location or not
         - dialogue: availability of a dialogue option in given location
         - current_dialogue: tracks the state of a dialogue at a location
+        - conversation_success: Checks whether the dialogue was successful
+        - music: sfx name that is supposed to play in a specific location
 
     Representation Invariants:
         - id_num > 0
         - name != ""
         - brief_description != ""
         - long_description != ""
+        - music != ""
     """
 
     # This is just a suggested starter class for Location.
@@ -51,7 +54,7 @@ class Location:
 
     def __init__(self, location_id: int, name: str, brief_description: str, long_description: str,
                  available_commands: dict[str, int], items: list,
-                 visited=False, dialogue=None) -> None:
+                 visited=False, dialogue=None, music=None) -> None:
         """Initialize a new location, along with its dialogue and other attributes."""
 
         self.id_num = location_id
@@ -64,6 +67,7 @@ class Location:
         self.dialogue = dialogue if dialogue else {}
         self.current_dialogue = None
         self.conversation_success = False
+        self.music = music
 
     def start_dialogue(self, game) -> None:
         """Start a dialogue at this location if available."""
@@ -99,8 +103,8 @@ encoded word: **V YBIR PFP111**":
                     # )
                     # game.game_log.add_event(event, f"retrieved {item.name}")
                 else:
-                    print("\n❌ Wrong answer. The barista shakes their head. 'Nope. Try again.'")
-                    self._show_dialogue_block(game)
+                    print("\n❌ Wrong answer. The barista shakes their head. 'Nope. Guess it isn't yours after all.")
+                    self.conversation_success = False
                 return  # Exit after processing direct input
 
             # Show player choices
