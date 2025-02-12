@@ -20,10 +20,8 @@ This file is Copyright (c) 2025 CSC111 Teaching Team
 from __future__ import annotations
 import json
 from typing import Optional, Any
-
 from game_entities import Location, Item, Player
 from proj1_event_logger import Event, EventList
-
 
 
 class AdventureGame:
@@ -35,7 +33,7 @@ class AdventureGame:
 
     Representation Invariants:
         - current_location_id is not None
-        - TODO
+        - ongoing is a boolean
     """
 
     # Private Instance Attributes (do NOT remove these two attributes):
@@ -44,7 +42,7 @@ class AdventureGame:
     #   - _items: a list of Item objects, representing all items in the game.
 
     _locations: dict[int, Location]
-    _items: list[Item]  #changed it from priv to public
+    _items: list[Item]
     current_location_id: int
     ongoing: bool
 
@@ -57,18 +55,10 @@ class AdventureGame:
         Preconditions:
         - game_data_file is the filename of a valid game data JSON file
         """
-
-        # Requirements:
-        # 1. Make sure the Location class is used to represent each location.
-        # 2. Make sure the Item class is used to represent each item.
-
-        # Suggested helper method (you can remove and load these differently if you wish to do so):
         self._locations, self._items = self._load_game_data(game_data_file)
-
-        # Suggested attributes (you can remove and track these differently if you wish to do so):
         self.current_location_id = initial_location  # game begins at king's college circle
         self.ongoing = True  # whether the game is ongoing
-        self.player = Player() #game player
+        self.player = Player()  # game player
         self.game_log = EventList()  # This is REQUIRED as one of the baseline requirements
 
     @staticmethod
@@ -111,35 +101,22 @@ class AdventureGame:
         if loc_id is None or loc_id not in self._locations:
             return self._locations[self.current_location_id]
         return self._locations[loc_id]
-    
+
     def get_item(self, target_item: str) -> Any:
         """
         Return Item object associated with the provided item name.
         If item not found, return None.
-        Parameters
-        ----------
-        target_item : str
-            _description_
-
-        Returns
-        -------
-        Item
-            _description_
         """
         return next((item for item in game._items if item.name.lower() == target_item.lower()), None)
+
 
 def handle_undo(game: AdventureGame) -> None:
     """
     Handle undoing the last command. If the last command is None, reset the game.
-
-    Parameters
-    ----------
-    game : AdventureGame
     """
     last_event = game.game_log.last
 
-
-    if last_event is game.game_log.first: # in case the player undoes an action that doesnt even exist
+    if last_event is game.game_log.first:  # In case the player undoes an action that doesnt even exist
         print("No valid actions to undo.")
         return
     
@@ -175,7 +152,6 @@ def handle_undo(game: AdventureGame) -> None:
 
     print(f"Undid most recent event. You returned to: {location.name}.")
 
-
 def go(game: AdventureGame, direction: str) -> None:
     """
     Handle the go command according to a given direction.
@@ -200,18 +176,16 @@ def go(game: AdventureGame, direction: str) -> None:
     else:
         print(f"Unable to move towards the {direction}")
 
-
 def handle_score(player: Player) -> None:
     """
-    handles the score method of the player class to display the current score.
-
-    Parameters
-    ----------
-    player : Player
+    Handles the score method of the player class to display the current score.
     """
     print(f"Your current score is: {player.score}")
 
 def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
+    """
+    Allows the user to pick up a specific item if it is present in the current location.
+    """
     location = game.get_location()
 
     # Find the item by name
@@ -235,11 +209,6 @@ def pick_up_item(game: AdventureGame, given_item_name: str) -> None:
 def drop_item(game: AdventureGame, given_item_name: str) -> None:
     """
     Allows the user to drop a specific item if it is present in their inventory
-
-    Parameters
-    ----------
-    game : AdventureGame
-    given_item_name : the item name they want to drop
     """
     # Find the item by name (case-insensitive)
     item_to_drop = game.get_item(given_item_name)  #next((item for item in game.player.inventory if item.name.lower() == given_item_name.lower()), None)
@@ -262,17 +231,12 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
     """
     Allows the user to deposit the items they have collected all over campus to claim their points
     The designated deposit room is the user's dorm (loc_id = 34)
-
-    Parameters
-    ----------
-    game : AdventureGame
-    given_item : Item
     """
     location = game.get_location()
     if location.id_num != 34:
         print("Unable to deposit items in current location, you must deposit everything in your dorm (HINT: it's in Knox College)")
         return
-    
+
     item_to_deposit = game.get_item(given_item_name)  # next((item for item in game.player.inventory if item.name.lower() == given_item_name.lower()), None)
 
     if item_to_deposit is not None:
@@ -291,6 +255,25 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
         game.game_log.add_event(event, f"deposit {item_to_deposit.name}")
     else:
         print("You have no items to deposit.")
+
+def display_location_options(game: AdventureGame) -> None:
+    """Display available actions at the current location."""
+    location = game.get_location()
+    print("What to do? Choose from: look, inventory, score, undo, log, quit")
+    print("At this location, you can also:")
+
+    for action in location.available_commands:
+        print("-", action)
+
+    for item in location.items:
+        if item.name.lower() == "lucky mug" and not location.conversation_success:
+            continue  # Skip "pick up lucky mug" if the conversation failed
+        print(item.description)
+        print(f"- pick up {item.name}")
+
+    if game.player.inventory:
+        for item in game.player.inventory:
+            print(f"- drop {item.name}")
 
 
 if __name__ == "__main__":
@@ -333,20 +316,7 @@ if __name__ == "__main__":
             print(location.brief_description)
         
         # game.game_log.add_event(event, choice) TODO check if i should remove this
-        for item in location.items:
-            print(item.description)
-            print("- pick up", item.name)
-
-        print("What to do? Choose from: look, inventory, score, undo, log, quit")
-        print("At this location, you can also:")
-
-
-        for action in location.available_commands:
-            print("-", action)
-
-        if game.player.inventory != []:
-            for item in game.player.inventory:
-                print("- drop", item.name)
+        display_location_options(game)
 
         # Validate choice
         choice = input("\nEnter action: ").lower().strip()

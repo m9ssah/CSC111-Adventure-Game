@@ -63,12 +63,14 @@ class Location:
         self.visited = visited
         self.dialogue = dialogue if dialogue else {}
         self.current_dialogue = None
+        self.conversation_success = False
 
     def start_dialogue(self, game) -> None:
         """Start a dialogue at this location if available."""
         if self.dialogue:
             self.current_dialogue = self.dialogue
-            self._show_dialogue_block(game)
+            return self._show_dialogue_block(game)
+        return None
 
     def _show_dialogue_block(self, game) -> None:
         """Show the current dialogue block and handle player choices."""
@@ -88,6 +90,7 @@ encoded word: **V YBIR PFP111**":
                     print("\n✅ Correct! The barista hands you the mug.")
                     item = game.get_item("lucky mug")
                     game.player.add_item(item)
+                    self.conversation_success = True
                     # TODO Delete:
                     #  event = Event(
                     #     id_num = game.current_location,

@@ -94,7 +94,6 @@ class AdventureGameSimulation:
         """
         Run the game simulation and log location descriptions.
         """
-
         current_event = self._events.first  # Start from the first event in the list
 
         while current_event:
