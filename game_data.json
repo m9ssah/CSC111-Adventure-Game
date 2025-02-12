@@ -562,7 +562,7 @@
     {
       "name": "laptop charger",
       "description": "You forgot your laptop charger in Tuesday's CSC111 lecture.",
-      "start_position": 14,
+      "start_position": 62,
       "target_position": 34,
       "target_points": 10
     }
