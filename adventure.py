@@ -260,7 +260,7 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
         game.player.score += item_to_deposit.target_points
         game.player.inventory.remove(item_to_deposit)
         print(f"You have successfully deposited {item_to_deposit.name} and received {item_to_deposit.target_points}")
-
+        deposited_items.add(item_to_deposit)
         #log event
         event = Event(
             game.current_location_id,
@@ -293,6 +293,8 @@ if __name__ == "__main__":
         description="game start"
     )
     game_log.add_event(first_event)
+    deposited_items = set()
+    dorm_room_id = 34
     
     while game.ongoing:
         location = game.get_location()
@@ -364,3 +366,13 @@ if __name__ == "__main__":
             else:
                 print("Invalid input. Try again.")
                 choice = input("\nEnter action: ").lower().strip()
+
+        if len(game.game_log.get_id_log()) >= 20: #TODO change number of steps according to the real amount thats reasonable
+            print("You have exceeded the amount of steps you can perform.")
+            print("Game Over")
+            game.ongoing = False
+
+        if deposited_items == {"usb drive", "laptop charger", "lucky mug"}:
+            print("You have successfully found all the items you lost!")
+            print("Congratulations, the game has ended...")
+            game.ongoing = False
