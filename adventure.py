@@ -163,6 +163,10 @@ def go(game: AdventureGame, direction: str) -> None:
     location = game.get_location()
     if f"go {direction}" in location.available_commands:
         new_location_id = location.available_commands[f"go {direction}"]
+        if new_location_id == dorm_room_id and not any(item.name.lower() == "dorm keys" for item in game.player.inventory):
+            print("Your dorm room seems to be locked and you don't have your keys with you.")
+            print("You must first look for your keys then you may enter.")
+            return
         previous_location_id = game.current_location_id  # Store current location before moving
         game.current_location_id = new_location_id
         new_location = game.get_location(new_location_id)
@@ -247,7 +251,7 @@ def deposit(game: AdventureGame, given_item_name: str) -> None:
         game.player.score += item_to_deposit.target_points
         game.player.inventory.remove(item_to_deposit)
         print(f"You have successfully deposited {item_to_deposit.name} and received {item_to_deposit.target_points}")
-        deposited_items.add(item_to_deposit)
+        deposited_items.add(str(item_to_deposit))
         #log event
         event = Event(
             game.current_location_id,
@@ -278,6 +282,10 @@ def display_location_options(game: AdventureGame) -> None:
     if game.player.inventory:
         for item in game.player.inventory:
             print(f"- drop {item.name}")
+
+    if location.id_num == dorm_room_id:
+        for item in game.player.inventory:
+            print(f"- deposit {item.name}")
 
 def play_music(game: AdventureGame) -> None:
     """
@@ -345,8 +353,7 @@ if __name__ == "__main__":
             next_command = choice
         )
             print(location.brief_description)
-        
-        # game.game_log.add_event(event, choice) TODO check if i should remove this
+
         display_location_options(game)
 
         # Validate choice
@@ -386,7 +393,7 @@ if __name__ == "__main__":
                 print("Invalid input. Try again.")
                 choice = input("\nEnter action: ").lower().strip()
 
-        if len(game.game_log.get_id_log()) >= 20: #TODO change number of steps according to the real amount thats reasonable
+        if len(game.game_log.get_id_log()) >= 50:
             print("You have exceeded the amount of steps you can perform.")
             print("Game Over")
             game.ongoing = False

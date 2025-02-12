@@ -92,8 +92,8 @@ encoded word: **V YBIR PFP111**":
 
                 if player_guess == correct_answer:
                     print("\n✅ Correct! The barista hands you the mug.")
-                    item = game.get_item("lucky mug")
-                    game.player.add_item(item)
+                    # item = game.get_item("lucky mug")
+                    # game.player.add_item(item)
                     self.conversation_success = True
                     # TODO Delete:
                     #  event = Event(

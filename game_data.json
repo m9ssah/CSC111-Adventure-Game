@@ -58,24 +58,10 @@
       "brief_description": "You are on the first floor of University College. King's College Circle is to the south, stairs lead up to the north, and long hallways stretch to the east and west",
       "long_description": "The first floor of University College greets you with its towering Gothic architecture and dimly lit hallways. The scent of polished wood lingers in the air. The hallways extend in both directions, disappearing into the quiet depths of the building. To the north, a grand staircase invites you upward, while to the south, the exit opens onto King's College Circle.",
       "available_commands": {
-        "go north": 21,
+        "go north": 24,
         "go east": 22,
         "go west": 23,
         "go south": 1
-      },
-      "items": [],
-      "music": "UC_audio.mp3"
-    },
-    {
-      "id": 21,
-      "name": "University College 1F",
-      "brief_description": "You are on the first floor of University College. King's College Circle is to the south, stairs lead up to the north, and long hallways stretch to the east and west",
-      "long_description": "The first floor of University College greets you with its towering Gothic architecture and dimly lit hallways. The scent of polished wood lingers in the air. The hallways extend in both directions, disappearing into the quiet depths of the building. To the north, a grand staircase invites you upward, while to the south, the exit opens onto King's College Circle.",
-      "available_commands": {
-        "go south": 20,
-        "go east": 22,
-        "go west": 23,
-        "go north": 24
       },
       "items": [],
       "music": "UC_audio.mp3"
@@ -118,7 +104,7 @@
       "id": 25,
       "name": "University College Library",
       "brief_description": "You are in the University College Library. The hallway is to the south, and the study room where you were earlier is to the north",
-      "long_description": "The first floor of University College greets you with its towering Gothic architecture and dimly lit hallways. The scent of polished wood lingers in the air. The hallways extend in both directions, disappearing into the quiet depths of the building. To the north, a grand staircase invites you upward, while to the south, the exit opens onto King's College Circle.",
+      "long_description": "You enter University College Library and cannot help but notice the amount of students present, it's almost as if you cannot step a foot in. You spot the study room you were using yesterday to the north, while the exit to the library is to the south.",
       "available_commands": {
         "go south": 24,
         "go north": 26
@@ -570,6 +556,13 @@
     {
       "name": "lucky mug",
       "description": "The barista placed your lucky mug on the countertop.",
+      "start_position": 14,
+      "target_position": 34,
+      "target_points": 10
+    },
+    {
+      "name": "laptop charger",
+      "description": "You forgot your laptop charger in Tuesday's CSC111 lecture.",
       "start_position": 14,
       "target_position": 34,
       "target_points": 10
