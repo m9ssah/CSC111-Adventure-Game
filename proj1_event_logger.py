@@ -90,7 +90,8 @@ class EventList:
         return self.first is None
 
     def add_event(self, event: Event, command: str = None) -> None:
-        """Add the given new event to the end of this event list.
+        """
+        Add the given new event to the end of this event list.
         The given command is the command which was used to reach this new event, or None if this is the first
         event in the game.
         """
